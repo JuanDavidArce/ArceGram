@@ -56,9 +56,8 @@
                     <label>Biography</label>
                     <textarea 
                     class="form-control {% if form.biography.errors %}is-invalid{% endif %}" 
-                    name="biography">
-                    {% if form.errors %}{{form.biography.value}}{% else %}{{profile.biography}}{% endif %}{{ profile.biography }}</textarea>
-
+                    name="biography">{% if form.errors %}{{form.biography.value}}{% else %}{{profile.biography}}{% endif %}</textarea>
+                    
                     <div class="invalid-feedback">
                         {% for error in form.biography.errors  %}
                             {{error}}
