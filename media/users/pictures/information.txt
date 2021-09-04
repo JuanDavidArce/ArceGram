@@ -1,0 +1,1 @@
+This folder is empty because the binary files should not be in git
