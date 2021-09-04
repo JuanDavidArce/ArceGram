@@ -1,4 +1,4 @@
 venv/
-.jpeg
-.gif
-.jpg
+*jpeg
+*gif
+*jpg
