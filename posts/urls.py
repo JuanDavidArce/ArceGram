@@ -12,12 +12,12 @@ urlpatterns=[
         name='feed'),
 
     path(
-        route='/post/<int:pk>',
+        route='post/<int:pk>',
         view=views.PostDetailView.as_view(), 
         name='detail'),
 
     path(
-        route='/posts/new/',
+        route='posts/new/',
         view=views.CreatePostView.as_view(),
         name='create'),
 
