@@ -2,16 +2,28 @@
 #Django
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls.base import reverse_lazy
-from django.views.generic import ListView, DetailView,CreateView
-
-
+from django.shortcuts import render,redirect
+from django.views.generic import ListView, DetailView,CreateView,UpdateView,RedirectView
+from django.views import View
 #Forms
 from posts.forms import PostForm
+
 #Models
 from posts.models import Post
 
 
 # Create your views here.
+
+class PostLike(View,LoginRequiredMixin):
+
+    def get(self, request, *args, **kwargs):
+        """Logic for the GET method"""
+        post=Post.objects.get(id = kwargs['idPost'])
+        post.likes+=1
+        post.save()
+        return redirect('posts:feed')
+
+
 
 class PostsFeedView(LoginRequiredMixin,ListView):
     """Return All Published posts"""
@@ -31,6 +43,7 @@ class PostDetailView(LoginRequiredMixin,DetailView):
 
 class CreatePostView(LoginRequiredMixin,CreateView):
     """Create new post view"""
+    #DON'T FORGET THE VALIDATION OF A PREVIOUS LIKE
     template_name='posts/new.html'
     form_class=PostForm
     success_url=reverse_lazy('posts:feed')
