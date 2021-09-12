@@ -1,7 +1,7 @@
 <div class="col-sm-12 col-md-8 offset-md-2 mt-5 p-0 post-container">
     <div class="media pt-3 pl-3 pb-1">
         <a href="{% url 'users:detail' post.user.username %}">
-            <img class="mr-3 rounded-circle" height="35" src="{{ post.profile.picture.url }}" alt="{{ post.user.get_full_name }}">
+            <img class="mr-3 rounded-circle" height="35" width="35" src="{{ post.profile.picture.url }}" alt="{{ post.user.get_full_name }}">
         </a>
         <div class="media-body">
             <p style="margin-top: 5px;">{{ post.user.get_full_name  }}</p>
@@ -10,11 +10,40 @@
 
     <img style="width: 100%;" src="{{ post.photo.url }}" alt="{{ post.title }}">
 
+
     <p class="mt-1 ml-2" >
-        <a href="{% url 'posts:like' post.id %}" style="color: #000; font-size: 20px;">
-            <i class="far fa-heart"></i>
-        </a> {{ post.likes }} likes
+
+        <form action="{% url 'posts:like'%}" method='POST' >
+            {% csrf_token %}
+            <input type='hidden' name='post_id' value="{{post.pk}}">
+            
+            <input type='hidden' name='ubication' 
+                {% if ubication %} 
+                    value="{{ ubication }}" 
+                {% else %} 
+                    value="detail_post" 
+                {% endif %}
+            >
+
+
+            <button  type='submit hidden' 
+            style="border-color: transparent;background-color: transparent;">
+                
+                {% if user.pk not in post.liked_by %}
+                    </p><i class="far fa-heart fa-spin" ></i>
+                {% else %}
+                    <i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
+                {% endif %}
+            
+            
+            </button>{{ post.likes }} likes 
+
+        </form>
+
     </p>
+
+
+
     <p class="ml-2 mt-0 mb-2">
         <b>{{ post.title }}</b> - <small>{{ post.created }}</small>
     </p>

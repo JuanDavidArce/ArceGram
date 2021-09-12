@@ -8,6 +8,8 @@ from users.models import Profile
 from django.contrib.auth.models import User
 from django.db import models
 
+
+
 class Post(models.Model):
     """Post model"""
     user = models.ForeignKey(User,on_delete=models.CASCADE)
@@ -21,6 +23,18 @@ class Post(models.Model):
 
     likes=models.IntegerField(default=0)
 
+    @property
+    def liked_by(self):
+        return [like.user_id for like in Like.objects.filter(post_id=self.pk)]
+
     def __str__(self) :
         """Return title and username"""
         return '{} by @{}'.format(self.title,self.user.username)
+
+
+
+class Like(models.Model):
+    """Like model"""
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    profile = models.ForeignKey(Profile,on_delete=models.CASCADE)
+    post=models.ForeignKey(Post,on_delete=models.CASCADE)

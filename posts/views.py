@@ -1,27 +1,44 @@
 """Post Views"""
 #Django
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
 from django.urls.base import reverse_lazy
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,HttpResponseRedirect
 from django.views.generic import ListView, DetailView,CreateView,UpdateView,RedirectView
 from django.views import View
 #Forms
 from posts.forms import PostForm
 
 #Models
-from posts.models import Post
+from posts.models import Post, Like
 
 
 # Create your views here.
 
 class PostLike(View,LoginRequiredMixin):
-
-    def get(self, request, *args, **kwargs):
+    """Update Likes"""
+    def post(self, request, *args, **kwargs):
         """Logic for the GET method"""
-        post=Post.objects.get(id = kwargs['idPost'])
-        post.likes+=1
-        post.save()
-        return redirect('posts:feed')
+        ubication=request.POST['ubication']
+        post=Post.objects.get(id = request.POST['post_id'])
+        user= User.objects.get(id=request.user.pk)
+        post_id= post.pk
+        user_id= user.pk
+        profile_id=user.profile.pk
+        like= Like.objects.filter(post_id=post_id).filter(user_id=user_id).filter(profile_id=profile_id)
+        if len(like)==0:
+            new_like= Like(user_id=user_id,profile_id=profile_id,post_id=post_id)
+            post.likes+=1
+            post.save()
+            new_like.save()
+        else:
+            like.delete()
+            post.likes-=1
+            post.save()
+        if ubication=='feed':
+            return redirect('posts:feed')
+        else:
+            return redirect('posts:detail',post_id)
 
 
 
@@ -33,12 +50,19 @@ class PostsFeedView(LoginRequiredMixin,ListView):
     ordering=('-created')
     paginate_by=30
     context_object_name='posts'
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super(PostsFeedView, self).get_context_data(**kwargs)
+        # Get the blog from id and add it to the context
+        context['ubication'] = 'feed'
+        return context
 
 class PostDetailView(LoginRequiredMixin,DetailView):
     """Return post detail"""
     template_name='posts/detail.html'
     queryset= Post.objects.all()
     context_object_name='post'
+    
 
 
 class CreatePostView(LoginRequiredMixin,CreateView):
