@@ -1,7 +1,7 @@
 """User views"""
 
 #Django
-from users.models import Profile
+from users.models import Profile, Follower
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
@@ -31,6 +31,17 @@ class UserDetailView(LoginRequiredMixin,DetailView):
         user=self.get_object()
         context['posts']=Post.objects.filter(user=user).order_by('-created')
         return context
+    def post(self, request, *args, **kwargs):
+        user_to_follow_id = int(request.POST['user_to_follow'])
+        user_follower_id = int(request.POST['user_follower'])
+        user= User.objects.get(id= user_to_follow_id)
+        already_following = Follower.objects.filter(user_id=user_to_follow_id).filter(follower_id=user_follower_id)
+        if len(already_following)==0:
+            new_follower = Follower(user_id= user_to_follow_id,follower_id=user_follower_id, profile_id=user.profile.pk)
+            new_follower.save()
+        else:
+            already_following.delete()
+        return redirect('users:detail',user.username)
 
 
 class SignupView(FormView):

@@ -63,6 +63,7 @@ class PostDetailView(LoginRequiredMixin,DetailView):
     queryset= Post.objects.all()
     context_object_name='post'
     
+    
 
 
 class CreatePostView(LoginRequiredMixin,CreateView):
