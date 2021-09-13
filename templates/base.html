@@ -10,11 +10,20 @@
     <link rel="stylesheet" href="{% static 'css/main.css' %}" />
 </head>
 <body>
+    
     {% include "nav.html" %}
     
-    <div class="container mt-5">
-        {% block container %}
-        {% endblock %}
-    </div>
+    
+    <main>
+        <div class="container mt-5" >
+            {% block container %}
+            {% endblock %}
+        </div>
+    </main>
+
+    
+    {% include "footer.html" %}
+    
+    
 </body>
 </html>
