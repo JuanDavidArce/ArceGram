@@ -30,24 +30,33 @@
                             Edit profile
                         </a>
                     {% else %}
-                        <a
-                            href=""
-                            class="ml-5 btn btn-sm btn-primary"
-                        >
-                            Follow
-                        </a>
+                        <form  method='POST' action="{% url 'users:detail' user.username %}" class="ml-5 btn btn-sm btn-primary">
+                            {% csrf_token %}
+                            <input type='hidden' name='user_to_follow' value="{{ user.pk }}">
+                            <input type='hidden' name='user_follower' value="{{ request.user.pk }}">
+                            <button  type='submit hidden' style="background-color: transparent;
+                            border-color:transparent;color:white"
+                            >
+                            {% if request.user.pk not in user.profile.followed_by %}
+                                Follow    
+                            {% else %}
+                                Following
+                            {% endif %}
+                            </button>
+                        </form>
+                       
                     {% endif %}
                 </h2>
 
                 <div class="row mt-2" style="font-size: 1.2em">
                     <div class="col-sm-4">
-                        <b>{{ user.profile.posts_count }}785</b> posts
+                        <b>{{ user.profile.published }}   </b> Posts
                     </div>
                     <div class="col-sm-4">
-                        <b>{{ user.profile.followers }}1,401</b> followers
+                        <b>{{ user.profile.followed_by|length }}</b> Followers
                     </div>
                     <div class="col-sm-4">
-                        <b>{{ user.profile.following }}491</b> following
+                        <b>{{ user.profile.following_to|length }}</b> Following
                     </div>
                 </div>
                 <div class="row mt-4">
