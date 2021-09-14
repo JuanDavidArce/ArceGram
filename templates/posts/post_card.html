@@ -27,7 +27,7 @@
             >
 
 
-            <button  type='submit hidden' 
+            <button  type='submit hidden'  class="like" name='post_id'
             style="border-color: transparent;background-color: transparent;">
                 
                 {% if user.pk not in post.liked_by %}
@@ -37,7 +37,23 @@
                 {% endif %}
             
             
-            </button>{{ post.likes }} likes 
+            </button>{{ post.likes }} likes
+            <script>
+                $('.like').click(function(){
+                   $.ajax("/posts/like/",{
+                      type: "POST",
+                      url: "{% url 'posts:like' %}",
+                      data: {'slug': $(this).attr('name'), 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+                      dataType: "json",
+                      success: function(response) {
+                          alert(' likes count is now ' + response.likes_count);
+                      },
+                      error: function(rs, e) {
+                           alert(rs.responseText);
+                      }
+                   }); 
+                })
+            </script> 
 
         </form>
 
