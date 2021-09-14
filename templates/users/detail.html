@@ -25,12 +25,13 @@
                     {% if user == request.user %}
                         <a
                             href="{% url "users:update_profile" %}"
-                            class="ml-5 btn btn-sm btn-outline-info"
+                            class="ml-5 btn btn-sm btn-outline-danger"
+          
                         >
                             Edit profile
                         </a>
                     {% else %}
-                        <form  method='POST' action="{% url 'users:detail' user.username %}" class="ml-5 btn btn-sm btn-primary">
+                        <form  method='POST' action="{% url 'users:detail' user.username %}" class="ml-5 btn btn-sm btn-danger">
                             {% csrf_token %}
                             <input type='hidden' name='user_to_follow' value="{{ user.pk }}">
                             <input type='hidden' name='user_follower' value="{{ request.user.pk }}">
