@@ -23,8 +23,7 @@ class PostLike(View,LoginRequiredMixin):
     """Update Likes"""
     def post(self, request, *args, **kwargs):
         """Logic for the GET method"""
-        ubication=request.POST['ubication']
-        post=Post.objects.get(id = request.POST['post_id'])
+        post=Post.objects.get(id = request.POST.get('id_post', None))
         user= User.objects.get(id=request.user.pk)
         post_id= post.pk
         user_id= user.pk
@@ -41,9 +40,10 @@ class PostLike(View,LoginRequiredMixin):
             like.delete()
             post.likes-=1
             post.save()
+        print("WE ARE HERE {}".format(post.pk))
         context={'likes_count':post.likes}
         
-        return HttpResponse(json.dumps(context), content_type='/posts/json')
+        return HttpResponse(json.dumps(context))
         
 
 
