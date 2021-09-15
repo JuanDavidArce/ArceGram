@@ -18,7 +18,7 @@
                     <input type="hidden" name="user" value="{{ user.pk}}" />
                     <input type="hidden" name="profile" value="{{ profile.pk }}" />
 
-                    {# Website field #}
+                    {# Title field #}
                     <div class="form-group">
                         <input
                             class="form-control {% if form.title.errors %}is-invalid{% endif %}"
@@ -28,6 +28,20 @@
                         >
                         <div class="invalid-feedback">
                             {% for error in form.title.errors %}{{ error }}{% endfor %}
+                        </div>
+                    </div>
+                    {# description field #}
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea 
+                            class="form-control {% if form.description.errors %}is-invalid{% endif %}" 
+                            name="description">
+                        </textarea>
+                        
+                        <div class="invalid-feedback">
+                            {% for error in form.description.errors  %}
+                                {{error}}
+                            {% endfor %}
                         </div>
                     </div>
 

@@ -13,7 +13,11 @@
 
 
     <p class="mt-1 ml-2" >
-
+        <div class="container">
+            <p>
+                {{ post.description }}
+            </p>
+        </div>
         <form action="{% url 'posts:like'%}" method='POST' >
             {% csrf_token %}
             <input type='hidden' name='post_id' value="{{post.pk}}">
