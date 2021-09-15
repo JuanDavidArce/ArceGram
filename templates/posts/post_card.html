@@ -14,32 +14,37 @@
 
     <p class="mt-1 ml-2" >
 
-        <form action="{% url 'posts:like'%}" method='POST' >
-            {% csrf_token %}
-            <input type='hidden' name='post_id' value="{{post.pk}}">
             
-            <input type='hidden' name='ubication' 
-                {% if ubication %} 
-                    value="{{ ubication }}" 
-                {% else %} 
-                    value="detail_post" 
-                {% endif %}
-            >
-
-
-            <button  type='submit hidden' 
+            
+            <button  type='submit hidden' class="like" name="{{ post.pk }}" 
             style="border-color: transparent;background-color: transparent;">
                 
                 {% if user.pk not in post.liked_by %}
-                    </p><i class="far fa-heart fa-spin" style="color: rgb(0, 0, 0);"></i>
+                    <i class="far fa-heart" style="color: rgb(0, 0, 0);"></i>
                 {% else %}
                     <i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
                 {% endif %}
-            
-            
-            </button>{{ post.likes }} likes 
+            </button>{{ post.likes }}
 
-        </form>
+        
+        <script>
+            $('.like').click(function(){
+                $.ajax("/posts/like/",{
+                    type: "POST",
+                    url: "{% url 'posts:like' %}",
+                    data: {'id_post': $(this).attr('name'), 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+                    dataType: "json",
+                    success: function(response) {
+                        location.reload();
+                    },
+                    error: function(rs, e) {
+                        alert(rs.responseText);
+                    }
+                }); 
+            })
+        </script> 
+
+       
 
     </p>
 

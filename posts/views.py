@@ -3,7 +3,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.urls.base import reverse_lazy
-from django.shortcuts import render,redirect,HttpResponseRedirect
+from django.shortcuts import render,redirect,HttpResponseRedirect,HttpResponse
 from django.views.generic import ListView, DetailView,CreateView,UpdateView,RedirectView
 from django.views import View
 #Forms
@@ -14,19 +14,23 @@ from posts.models import Post, Like
 
 
 # Create your views here.
+try:
+    from django.utils import simplejson as json
+except ImportError:
+    import json
 
 class PostLike(View,LoginRequiredMixin):
     """Update Likes"""
     def post(self, request, *args, **kwargs):
-        """Logic for the GET method"""
-        ubication=request.POST['ubication']
-        post=Post.objects.get(id = request.POST['post_id'])
+        """Logic for the POST method"""
+        post=Post.objects.get(id = request.POST.get('id_post'))
         user= User.objects.get(id=request.user.pk)
         post_id= post.pk
         user_id= user.pk
         profile_id=user.profile.pk
         like= Like.objects.filter(post_id=post_id).filter(user_id=user_id).filter(profile_id=profile_id)
-        if len(like)==0:
+        
+        if len(like)<=0:
             new_like= Like(user_id=user_id,profile_id=profile_id,post_id=post_id)
             post.likes+=1
             post.save()
@@ -35,11 +39,13 @@ class PostLike(View,LoginRequiredMixin):
             like.delete()
             post.likes-=1
             post.save()
-        if ubication=='feed':
-            return redirect('posts:feed')
-        else:
-            return redirect('posts:detail',post_id)
-
+        
+        context={'likes_count':post.likes} #If i need some variable i can use this
+        
+        return HttpResponse(json.dumps(context))
+        
+    def get(self, request, *args, **kwargs):
+        return render(request,"posts/feed.html")
 
 
 class PostsFeedView(LoginRequiredMixin,ListView):
