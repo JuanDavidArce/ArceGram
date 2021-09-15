@@ -18,7 +18,7 @@ from posts.models import Post, Like
 class PostLike(View,LoginRequiredMixin):
     """Update Likes"""
     def post(self, request, *args, **kwargs):
-        """Logic for the GET method"""
+        """Logic for the POST method"""
         ubication=request.POST['ubication']
         post=Post.objects.get(id = request.POST['post_id'])
         user= User.objects.get(id=request.user.pk)
