@@ -23,6 +23,8 @@ class Post(models.Model):
 
     likes=models.IntegerField(default=0)
 
+    description= models.TextField(default="")
+
     @property
     def liked_by(self):
         return [like.user_id for like in Like.objects.filter(post_id=self.pk)]
