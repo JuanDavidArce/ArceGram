@@ -29,8 +29,8 @@ class PostLike(View,LoginRequiredMixin):
         user_id= user.pk
         profile_id=user.profile.pk
         like= Like.objects.filter(post_id=post_id).filter(user_id=user_id).filter(profile_id=profile_id)
-        
-        if len(like)<=0:
+        print(profile_id, "profile", user_id,"user",like,"like")
+        if len(like)==0:
             new_like= Like(user_id=user_id,profile_id=profile_id,post_id=post_id)
             post.likes+=1
             post.save()
@@ -44,8 +44,6 @@ class PostLike(View,LoginRequiredMixin):
         
         return HttpResponse(json.dumps(context))
         
-    def get(self, request, *args, **kwargs):
-        return render(request,"posts/feed.html")
 
 
 class PostsFeedView(LoginRequiredMixin,ListView):
