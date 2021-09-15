@@ -22,16 +22,15 @@ except ImportError:
 class PostLike(View,LoginRequiredMixin):
     """Update Likes"""
     def post(self, request, *args, **kwargs):
-        """Logic for the GET method"""
-        post=Post.objects.get(id = request.POST.get('id_post', None))
+        """Logic for the POST method"""
+        post=Post.objects.get(id = request.POST.get('id_post'))
         user= User.objects.get(id=request.user.pk)
         post_id= post.pk
         user_id= user.pk
         profile_id=user.profile.pk
         like= Like.objects.filter(post_id=post_id).filter(user_id=user_id).filter(profile_id=profile_id)
         
-
-        if len(like)==0:
+        if len(like)<=0:
             new_like= Like(user_id=user_id,profile_id=profile_id,post_id=post_id)
             post.likes+=1
             post.save()
@@ -40,12 +39,13 @@ class PostLike(View,LoginRequiredMixin):
             like.delete()
             post.likes-=1
             post.save()
-        print("WE ARE HERE {}".format(post.pk))
-        context={'likes_count':post.likes}
+        
+        context={'likes_count':post.likes} #If i need some variable i can use this
         
         return HttpResponse(json.dumps(context))
         
-
+    def get(self, request, *args, **kwargs):
+        return render(request,"posts/feed.html")
 
 
 class PostsFeedView(LoginRequiredMixin,ListView):
