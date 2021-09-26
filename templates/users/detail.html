@@ -85,7 +85,16 @@
                             <button type="submit hidden" style="background-color: transparent;border-color:transparent;">
                                 <i class="fa fa-trash" aria-hidden="true" style="color: red;"></i>
                             </button>
-                        </form> 
+                        </form>
+
+                        <form action="{% url "posts:update" post.pk %}" method="POST"  style="background-color: transparent;border-color:transparent;">
+                            {% csrf_token %}
+                            <input type="hidden" name="post_id" value="{{ post.pk }}">
+                            <button type="submit hidden" style="background-color: transparent;border-color:transparent;">
+                                <i class="fas fa-arrow-alt-circle-up" aria-hidden="true" style="color: red;"></i>
+                            </button>
+                        </form>
+                        
 
                     {% endif %}
 
@@ -94,6 +103,7 @@
                         <img src="{{ post.photo.url }}" alt="{{ post.title }}" class="img-fluid"/>
                         {{ post.title }}
                     </a>
+
                 </div>
 
             </div>

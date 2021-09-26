@@ -4,8 +4,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.urls.base import reverse_lazy
 from django.shortcuts import render,redirect,HttpResponseRedirect
-from django.views.generic import ListView, DetailView,CreateView,DeleteView
+from django.views.generic import ListView, DetailView,CreateView,UpdateView
 from django.views import View
+from django.urls.base import reverse_lazy,reverse
 #Forms
 from posts.forms import PostForm
 
@@ -14,6 +15,21 @@ from posts.models import Post, Like
 
 
 # Create your views here.
+
+
+class UpdatePost(LoginRequiredMixin,UpdateView):
+    """Update a post"""
+    template_name='posts/update.html'
+    model=Post
+    fields={'user','title','photo','description'}
+
+    def get_success_url(self):
+        """Return to users profile"""
+        username=self.object.user.username
+        return reverse('users:detail',kwargs={'username':username} )
+
+
+
 class DeletePost(View,LoginRequiredMixin):
     """Delete Post"""
     def post(self,request,*args,**kwargs):
