@@ -77,25 +77,28 @@
             <div class="col-sm-4 pt-5 pb-5 pr-5 pl-5 d-flex justify-content-center">
                 <div>
                     {% if user == request.user %}
-                    
-                        <form action="{% url "posts:delete" %}" method="POST"  style="background-color: transparent;border-color:transparent;">
-                            {% csrf_token %}
-                            <input type="hidden" name="post_id" value="{{ post.pk }}">
-                            <input type="hidden" name="username" value="{{ user.username }}">
-                            <button type="submit hidden" style="background-color: transparent;border-color:transparent;">
-                                <i class="fa fa-trash" aria-hidden="true" style="color: red;"></i>
-                            </button>
-                        </form>
-
-                        <form action="{% url "posts:update" post.pk %}" method="POST"  style="background-color: transparent;border-color:transparent;">
-                            {% csrf_token %}
-                            <input type="hidden" name="post_id" value="{{ post.pk }}">
-                            <button type="submit hidden" style="background-color: transparent;border-color:transparent;">
-                                <i class="fas fa-arrow-alt-circle-up" aria-hidden="true" style="color: red;"></i>
-                            </button>
-                        </form>
-                        
-
+                        <div class="container">
+                            
+                            <div class="row">
+                                <form action="{% url "posts:delete" %}" method="POST"  style="background-color: transparent;border-color:transparent;">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="post_id" value="{{ post.pk }}">
+                                    <input type="hidden" name="username" value="{{ user.username }}">
+                                    <button type="submit hidden" style="background-color: transparent;border-color:transparent;">
+                                        <i class="fa fa-trash" aria-hidden="true" style="color: red;"></i>
+                                    </button>
+                                </form>
+        
+                                <form action="{% url "posts:update" post.pk %}" method="POST"  style="background-color: transparent;border-color:transparent;">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="post_id" value="{{ post.pk }}">
+                                    <button type="submit hidden" style="background-color: transparent;border-color:transparent;">
+                                        <i class="fas fa-arrow-alt-circle-up" aria-hidden="true" style="color: red;"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+        
                     {% endif %}
 
 
