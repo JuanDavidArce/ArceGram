@@ -26,4 +26,9 @@ urlpatterns=[
         view=views.PostLike.as_view(),
         name='like'),
 
+    path(
+        route='posts/delete/',
+        view=views.DeletePost.as_view(),
+        name='delete'),
+
 ]

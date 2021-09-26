@@ -4,7 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.urls.base import reverse_lazy
 from django.shortcuts import render,redirect,HttpResponseRedirect
-from django.views.generic import ListView, DetailView,CreateView,UpdateView,RedirectView
+from django.views.generic import ListView, DetailView,CreateView,DeleteView
 from django.views import View
 #Forms
 from posts.forms import PostForm
@@ -14,6 +14,12 @@ from posts.models import Post, Like
 
 
 # Create your views here.
+class DeletePost(View,LoginRequiredMixin):
+    """Delete Post"""
+    def post(self,request,*args,**kwargs):
+        Post.objects.get(pk=request.POST['post_id']).delete()
+        return redirect('users:detail',request.POST['username'])
+
 
 class PostLike(View,LoginRequiredMixin):
     """Update Likes"""
