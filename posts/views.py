@@ -21,7 +21,8 @@ class UpdatePost(LoginRequiredMixin,UpdateView):
     """Update a post"""
     template_name='posts/update.html'
     model=Post
-    fields={'user','title','photo','description'}
+    fields={'title','description'}
+    context_object_name='post'
 
     def get_success_url(self):
         """Return to users profile"""
