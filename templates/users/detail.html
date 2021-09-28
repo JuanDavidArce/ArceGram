@@ -18,6 +18,7 @@
                     height="150px"
                 />
             </div>
+         
 
             <div class="col-sm-8">
                 <h2 style="font-weight: 100;">
@@ -29,6 +30,13 @@
           
                         >
                             Edit profile
+                        </a>
+                        <a
+                            href="{% url "users:delete_profile" user.pk  %}"
+                            class="ml-5 btn btn-sm btn-outline-danger"
+          
+                        >
+                            Delete Account
                         </a>
                     {% else %}
                         <form  method='POST' action="{% url 'users:detail' user.username %}" class="ml-5 btn btn-sm btn-danger">

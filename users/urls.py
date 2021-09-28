@@ -28,6 +28,10 @@ urlpatterns=[
         route='me/profile/',
         view=views.UpdateProfileView.as_view(),
         name='update_profile'),
+    path(
+        route='me/profile/<int:pk>',
+        view=views.DeleteUser.as_view(),
+        name='delete_profile'),
 
     #Posts
     path(
