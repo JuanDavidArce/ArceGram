@@ -1,13 +1,14 @@
 """User views"""
 
 #Django
+from django.db.models.base import Model
 from users.models import Profile, Follower
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls.base import reverse_lazy,reverse
-from django.views.generic import DetailView,FormView,UpdateView
+from django.views.generic import DetailView,FormView,UpdateView,DeleteView
 from django.urls import reverse_lazy
 from django.contrib.auth import views as auth_views
 
@@ -17,6 +18,12 @@ from posts.models import Post
 #Forms
 from users.forms import  SignupForm
 
+
+
+class DeleteUser(DeleteView,LoginRequiredMixin):
+    """Delete Post"""
+    model=User
+    success_url= reverse_lazy('users:login')
 
 class UserDetailView(LoginRequiredMixin,DetailView):
     """User template view"""
