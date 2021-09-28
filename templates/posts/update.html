@@ -11,15 +11,13 @@
             <div class="col-6 pt-3 pb-3" id="profile-box">
                 <h4 class="mb-4">Update your post!</h4>
 
-                <form method="POST" enctype="multipart/form-data">
+                <form method="POST" >
                     {% csrf_token %}
 
-
-                    <input type="hidden" name="user" value="{{ user.pk }}" />
-                    <input type="hidden" name="profile" value="{{ profile.pk }}" />
-
+                   
                     {# Title field #}
                     <div class="form-group">
+                        <label>Title</label>
                         <input
                             class="form-control {% if form.title.errors %}is-invalid{% endif %}"
                             type="text"

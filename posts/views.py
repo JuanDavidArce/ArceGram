@@ -24,11 +24,16 @@ class UpdatePost(LoginRequiredMixin,UpdateView):
     fields={'title','description'}
     context_object_name='post'
 
+    def post(self, request, *args, **kwargs):
+        if request.POST.get("post_id",False):
+            return redirect("posts:update",request.POST["post_id"])
+        return super().post(request, *args, **kwargs)
+ 
     def get_success_url(self):
         """Return to users profile"""
         username=self.object.user.username
-        return reverse('users:detail',kwargs={'username':username} )
-
+        return reverse_lazy('users:detail',kwargs={'username':username} )
+    
 
 
 class DeletePost(View,LoginRequiredMixin):
