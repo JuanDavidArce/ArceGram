@@ -36,6 +36,10 @@ urlpatterns=[
         route='me/profile/followers/<int:pk>',
         view=views.UserFollowers.as_view(),
         name='followers'),
+    path(
+        route='me/profile/following/<int:pk>',
+        view=views.UserFollowing.as_view(),
+        name='following'),
 
     #Posts
     path(
