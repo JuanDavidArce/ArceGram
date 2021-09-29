@@ -66,7 +66,7 @@
                             <a href="{% url 'users:followers' user.pk %}"><b>{{ user.profile.followed_by|length }}</b> Followers</a>
                         </div>
                         <div class="col-sm-4">
-                            <a href=""><b>{{ user.profile.following_to|length }}</b> Following</a>
+                            <a href="{% url 'users:following' user.pk %}"><b>{{ user.profile.following_to|length }}</b> Following</a>
                         </div>
                     {% else %}
                         <div class="col-sm-4">

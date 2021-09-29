@@ -18,6 +18,15 @@ from posts.models import Post
 #Forms
 from users.forms import  SignupForm
 
+class UserFollowing(LoginRequiredMixin,ListView):
+    """Return All Following Users"""
+    template_name= 'users/following.html'
+    Model= Follower
+    context_object_name='following'
+    def get_queryset(self):
+        return Follower.objects.filter(follower_id=self.request.user.pk)
+    
+
 class UserFollowers(LoginRequiredMixin,ListView):
     """Return All Followers"""
     template_name='users/followers.html'
