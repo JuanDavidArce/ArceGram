@@ -34,5 +34,9 @@ urlpatterns=[
         route='posts/update/<int:pk>',
         view=views.UpdatePost.as_view(),
         name='update'),
+    path(
+        route='posts/comment/',
+        view=views.PostComment.as_view(),
+        name='comment'),
 
 ]

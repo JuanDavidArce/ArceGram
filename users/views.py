@@ -18,6 +18,8 @@ from posts.models import Post
 #Forms
 from users.forms import  SignupForm
 
+
+
 class UserFollowing(LoginRequiredMixin,ListView):
     """Return All Following Users"""
     template_name= 'users/following.html'

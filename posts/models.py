@@ -4,10 +4,10 @@
 #in this part classes in our database are gonna be the tables
 
 #Django
+from django.db.models.deletion import CASCADE
 from users.models import Profile
 from django.contrib.auth.models import User
 from django.db import models
-
 
 
 class Post(models.Model):
@@ -28,6 +28,10 @@ class Post(models.Model):
     @property
     def liked_by(self):
         return [like.user_id for like in Like.objects.filter(post_id=self.pk)]
+    
+    @property
+    def comments(self):
+        return Comment.objects.filter(post_id=self.pk)
 
     def __str__(self) :
         """Return title and username"""
@@ -40,3 +44,15 @@ class Like(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     profile = models.ForeignKey(Profile,on_delete=models.CASCADE)
     post=models.ForeignKey(Post,on_delete=models.CASCADE)
+
+
+class Comment(models.Model):
+    """Coment model"""
+    comment= models.TextField()
+    user = models.ForeignKey(User,on_delete=CASCADE)
+    post=models.ForeignKey(Post,on_delete=models.CASCADE)
+
+    created =models.DateTimeField(auto_now_add=True)
+    modified =models.DateTimeField(auto_now=True)
+
+

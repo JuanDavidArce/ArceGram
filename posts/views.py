@@ -1,5 +1,6 @@
 """Post Views"""
 #Django
+from django.contrib.auth import models
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.urls.base import reverse_lazy
@@ -11,11 +12,18 @@ from django.urls.base import reverse_lazy,reverse
 from posts.forms import PostForm
 
 #Models
-from posts.models import Post, Like
+from posts.models import Post, Like, Comment
 
 
 # Create your views here.
 
+class PostComment(LoginRequiredMixin,View):
+    def post(self, request, *args, **kwargs):
+        if request.POST['comment'].strip()!='':
+            comment = Comment(comment=request.POST['comment'],user_id=request.POST['user_id'],post_id=request.POST['post_id'])
+            comment.save()
+
+        return redirect("posts:feed")
 
 class UpdatePost(LoginRequiredMixin,UpdateView):
     """Update a post"""
