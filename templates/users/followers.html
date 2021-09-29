@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block container %}
+    <div class="row-12"><h3>Followers <i class="fa fa-users" aria-hidden="true"></i></h3></div>
+    <div class="row-12">
+        <div class="list-group">
+            <div class="list-group-item" style="background-color: rgb(255, 138, 138);"><h5 style="color: white;">Username</h5></div>
+            {% for follower in followers  %}
+                <a href="{% url "users:detail" follower.follower.username %}" class="list-group-item">{{ follower.follower.username }}</a>
+            {% endfor %}
+    
+        </div>
+    </div>
+    
+    
+{% endblock container %}

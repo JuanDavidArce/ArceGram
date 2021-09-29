@@ -32,6 +32,10 @@ urlpatterns=[
         route='me/profile/<int:pk>',
         view=views.DeleteUser.as_view(),
         name='delete_profile'),
+    path(
+        route='me/profile/followers/<int:pk>',
+        view=views.UserFollowers.as_view(),
+        name='followers'),
 
     #Posts
     path(

@@ -8,7 +8,7 @@ from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls.base import reverse_lazy,reverse
-from django.views.generic import DetailView,FormView,UpdateView,DeleteView
+from django.views.generic import DetailView,FormView,UpdateView,DeleteView,ListView
 from django.urls import reverse_lazy
 from django.contrib.auth import views as auth_views
 
@@ -18,8 +18,14 @@ from posts.models import Post
 #Forms
 from users.forms import  SignupForm
 
-
-
+class UserFollowers(LoginRequiredMixin,ListView):
+    """Return All Followers"""
+    template_name='users/followers.html'
+    Model=Follower
+    context_object_name='followers'
+    def get_queryset(self):
+        return Follower.objects.filter(user_id=self.request.user.pk)
+    
 class DeleteUser(DeleteView,LoginRequiredMixin):
     """Delete Post"""
     model=User
