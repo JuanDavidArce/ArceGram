@@ -29,8 +29,6 @@
                     value="detail_post" 
                 {% endif %}
             >
-            
-
 
             <button  type='submit hidden' 
             style="border-color: transparent;background-color: transparent;">
@@ -43,12 +41,54 @@
             
             
             </button>{{ post.likes }} likes 
-            <p class="ml-2 mt-0 mb-2">
-                <b>{{ post.title }}</b> - <small>{{ post.created }}</small>
-            </p>
+            
+        </form>
+        <p class="ml-2 mt-0 mb-2">
+            <b>{{ post.title }}</b> - <small>{{ post.created }}</small>
+        </p>
+        <div class="container"
+            style="height:  100px;
+            border: 1px solid #ddd;
+            background: #f1f1f1;
+            overflow-y: scroll;">
+            {% if not post.comments %}
+                Whithout Comments
+            {% endif %}
+            {% for comment in post.comments  %}
+            
+                <div class="row ml-2">
+                    <a href="{% url 'users:detail' comment.user.username %}">
+                        <img class="mr-3 rounded-circle" height="30" width="30" src="{{ comment.user.profile.picture.url }}" alt="{{ comment.user.get_full_name }}" >
+                    </a>
+                    <div class="media-body">
+                        <p style="margin-top: 5px;">{{ comment.user.get_full_name  }}</p>
+                    </div>
+                    <p class="ml-2 mt-0 mb-2">
+                        <small>{{ comment.modified }}</small>
+                    </p>
+                </div>
+
+                <div class="row ml-2" style="border-bottom: 1px solid black;">
+                        <p style="font-size: 15px;">
+                            {{ comment.comment }}
+                        </p>
+                </div>
+                 
+            {% endfor %}
+
+        </div >
+        <form action="{% url "posts:comment" %}" method="POST">
+            {% csrf_token %}
+            <input type='hidden' name='user_id' value="{{ request.user.pk }}">
+            <input type='hidden' name='post_id' value="{{ post.pk }}">
+            <textarea 
+                class="form-control" 
+                name="comment">
+            </textarea>
+            <button type="submit">Comment</button>
 
         </form>
-
+         
     </p>
 
 
