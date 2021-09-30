@@ -31,12 +31,20 @@ urlpatterns=[
         view=views.DeletePost.as_view(),
         name='delete'),
     path(
-        route='posts/update/<int:pk>',
+        route='posts/update/<int:pk>/',
         view=views.UpdatePost.as_view(),
         name='update'),
     path(
         route='posts/comment/',
         view=views.PostComment.as_view(),
         name='comment'),
+    path(
+        route='posts/comment/delete/',
+        view=views.DeleteComment.as_view(),
+        name='delete_comment'),
+    path(
+        route='posts/comment/update/<int:pk>/',
+        view=views.UpdateComment.as_view(),
+        name='update_comment'),
 
 ]

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block head_content %}
+    <title>Update a comment</title>
+{% endblock %}
+
+{% block container %}
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-6 pt-3 pb-3" id="profile-box">
+                <h4 class="mb-4">Update your comment! <i class="fa fa-comment" aria-hidden="true" style="color:red"></i></h4>
+
+                <form method="POST" >
+                    {% csrf_token %}
+
+                    {# Comment field #}
+                    <div class="form-group">
+                        <label>Comment</label>
+                        <textarea 
+                            class="form-control {% if form.comment.errors %}is-invalid{% endif %}" 
+                            name="comment">{{ comment.comment }}
+                        </textarea>
+                        <div class="invalid-feedback">
+                            
+                            {% for error in form.comment.errors  %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-danger btn-block mt-5" >Update!</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
