@@ -1,9 +1,9 @@
 """Post Views"""
 #Django
+from django import views
 from django.contrib.auth import models
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
-from django.urls.base import reverse_lazy
 from django.shortcuts import render,redirect,HttpResponseRedirect
 from django.views.generic import ListView, DetailView,CreateView,UpdateView
 from django.views import View
@@ -15,7 +15,32 @@ from posts.forms import PostForm
 from posts.models import Post, Like, Comment
 
 
+
 # Create your views here.
+class UpdateComment(LoginRequiredMixin,UpdateView):
+    """Update a comment"""
+    template_name='posts/update_comment.html'
+    model=Comment
+    fields={'comment'}
+    context_object_name='comment'
+    success_url= reverse_lazy('posts:feed')
+
+    def post(self, request, *args, **kwargs):
+        if request.POST.get("comment_id",False):
+            return redirect("posts:update_comment",request.POST["comment_id"])
+        return super().post(request, *args, **kwargs)
+
+    
+
+    
+
+
+
+class DeleteComment(LoginRequiredMixin,View):
+    """Delete a Comment"""
+    def post(self,request,*args,**kwargs):
+        Comment.objects.get(pk= self.request.POST['comment_id']).delete()
+        return redirect('posts:feed')
 
 class PostComment(LoginRequiredMixin,View):
     def post(self, request, *args, **kwargs):
@@ -40,7 +65,8 @@ class UpdatePost(LoginRequiredMixin,UpdateView):
     def get_success_url(self):
         """Return to users profile"""
         username=self.object.user.username
-        return reverse_lazy('users:detail',kwargs={'username':username} )
+        return reverse_lazy('users:detail',kwargs={'username':username})
+
     
 
 

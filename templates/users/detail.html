@@ -108,10 +108,9 @@
                                 </form>
         
                                 <form action="{% url "posts:update" post.pk %}" method="POST"  style="background-color: transparent;border-color:transparent;">
-                                    <input type="hidden" name="post_id" value="{{ post.pk }}" />
                                     {% csrf_token %}
                                     <button type="submit hidden" style="background-color: transparent;border-color:transparent;">
-                                        <i class="fas fa-arrow-alt-circle-up" aria-hidden="true" style="color: red;"></i>
+                                        <i class="fas fa-arrow-alt-circle-up" aria-hidden="true" style="color: rgb(0, 255, 0);"></i>
                                     </button>
                                 </form>
                             </div>
