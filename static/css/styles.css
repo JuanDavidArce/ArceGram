@@ -1,0 +1,74 @@
+.like {
+    background-color: transparent;
+    border-color: transparent;
+}
+
+.comment {
+    height:  100px;
+    border: 1px solid #ddd;
+    background: #f1f1f1;
+    overflow-y: scroll;
+}
+
+.delete-comment-button {
+    background-color: transparent;
+    border-color:transparent;
+}
+
+.delete-comment{
+    background-color: transparent;
+    border-color:transparent;
+}
+
+.trash-icon{
+    color: red;
+}
+
+.update-comment {
+    background-color: transparent;
+    border-color:transparent;
+}
+
+.update-comment-button {
+    background-color: transparent;
+    border-color:transparent;
+}
+
+.update-icon {
+    color: rgb(0, 255, 0);
+}
+
+.row-comment {
+    border-bottom: 1px solid black;
+}
+
+.button-danger {
+    color:white;
+}
+
+.comment-icon {
+    color:red
+}
+
+.top-navbar {
+    background-color: #fafafa;
+    border-bottom: 1px solid rgba(0,0,0,.0975);
+}
+.logo-ArceGram-nav {
+    border-right: 2px solid #000000;
+}
+
+.new-post-icon {
+    color:black;
+}
+
+
+.profile-user {
+    margin-top: 8em;
+}
+
+.button-follow-unfollow {
+    background-color: transparent;
+    border-color:transparent;
+    color:white;
+}

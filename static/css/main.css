@@ -11,12 +11,11 @@ html, body {
     border-radius: 1px;
 }
 
-#main-navbar {
-    background: #fff;
-    border-bottom: 1px solid rgba(0,0,0,.0975);
-}
+
 
 .post-container {
+    background-color: rgb(255, 255, 255);
+    color:rgb(0, 0, 0);
     background: #fff;
     border: 1px solid #e6e6e6;
     border-radius: 3px;
@@ -43,4 +42,7 @@ html, body {
 #user-posts #post-thumb {
     background: #fff;
 }
+
+
+
 

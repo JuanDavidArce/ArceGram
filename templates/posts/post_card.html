@@ -1,4 +1,4 @@
-<div class="col-sm-12 col-md-8 offset-md-2 mt-5 p-0 post-container" style="background-color: rgb(255, 255, 255);color:rgb(0, 0, 0);">
+<div class="col-sm-12 col-md-8 offset-md-2 mt-5 p-0 post-container">
     
     <div class="media pt-3 pl-3 pb-1" >
         <a href="{% url 'users:detail' post.user.username %}">
@@ -13,11 +13,13 @@
 
 
     <p class="mt-1 ml-2" >
+
         <div class="container">
             <p>
                 {{ post.description }}
             </p>
         </div>
+
         <form action="{% url 'posts:like'%}" method='POST' >
             {% csrf_token %}
             <input type='hidden' name='post_id' value="{{post.pk}}">
@@ -30,8 +32,7 @@
                 {% endif %}
             >
 
-            <button  type='submit hidden' 
-            style="border-color: transparent;background-color: transparent;">
+            <button  type='submit hidden' class="like">
                 
                 {% if user.pk not in post.liked_by %}
                     <i class="far fa-heart fa-spin" style="color: rgb(0, 0, 0);"></i>
@@ -43,14 +44,12 @@
             </button>{{ post.likes }} likes 
             
         </form>
+
         <p class="ml-2 mt-0 mb-2">
             <b>{{ post.title }}</b> - <small>{{ post.created }}</small>
         </p>
-        <div class="container"
-            style="height:  100px;
-            border: 1px solid #ddd;
-            background: #f1f1f1;
-            overflow-y: scroll;">
+
+        <div class="container comment">
             {% if not post.comments %}
                 Whithout Comments
             {% endif %}
@@ -64,18 +63,19 @@
                         <p style="margin-top: 5px;">{{ comment.user.get_full_name  }}</p>
                     </div>
                     {% if request.user == comment.user %}
-                        <form action="{% url "posts:delete_comment" %}" method="POST"  style="background-color: transparent;border-color:transparent;">
+                        <form action="{% url "posts:delete_comment" %}" method="POST" class="delete-comment">
                             {% csrf_token %}
                             <input type="hidden" name="comment_id" value="{{ comment.pk }}">
-                            <button type="submit hidden" style="background-color: transparent;border-color:transparent;">
-                                <i class="fa fa-trash" aria-hidden="true" style="color: red;"></i>
+                            <button type="submit hidden" class="delete-comment-button" >
+                                <i class="fa fa-trash trash-icon" aria-hidden="true"></i>
                             </button>
                         </form>
-                        <form action="{% url "posts:update_comment" comment.pk %}" method="POST"  style="background-color: transparent;border-color:transparent;">
+                        
+                        <form action="{% url "posts:update_comment" comment.pk %}" method="POST" class="update-comment">
                             {% csrf_token %}
                             <input type="hidden" name="comment_id" value="{{ comment.pk }}">
-                            <button type="submit hidden" style="background-color: transparent;border-color:transparent;">
-                                <i class="fas fa-arrow-alt-circle-up" aria-hidden="true" style="color: rgb(0, 255, 0);"></i>
+                            <button type="submit hidden" class="update-comment-button">
+                                <i class="fas fa-arrow-alt-circle-up update-icon" aria-hidden="true"></i>
                             </button>
                         </form>
                     {% endif %}
@@ -85,7 +85,7 @@
                     </p>
                 </div>
 
-                <div class="row ml-2" style="border-bottom: 1px solid black;">
+                <div class="row ml-2 row-comment" >
                         <p style="font-size: 15px;">
                             {{ comment.comment }}
                         </p>
@@ -103,7 +103,7 @@
                 class="form-control" 
                 name="comment"> 
             </textarea>
-            <button class="btn btn-danger" type="submit" style="color:white;">Comment <i class="fa fa-comments" aria-hidden="true"></i></button>
+            <button class="btn btn-danger button-danger" type="submit">Comment <i class="fa fa-comments" aria-hidden="true"></i></button>
             
         </form>
          
