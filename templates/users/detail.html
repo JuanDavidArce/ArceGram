@@ -6,7 +6,7 @@
 
 {% block container %}
 
-    <div class="container mb-5" style="margin-top: 8em;">
+    <div class="container mb-5 profile-user">
         <div class="row">
 
             <div class="col-sm-4 d-flex justify-content-center">
@@ -43,9 +43,7 @@
                             {% csrf_token %}
                             <input type='hidden' name='user_to_follow' value="{{ user.pk }}">
                             <input type='hidden' name='user_follower' value="{{ request.user.pk }}">
-                            <button  type='submit hidden' style="background-color: transparent;
-                            border-color:transparent;color:white"
-                            >
+                            <button class="button-follow-unfollow" type='submit hidden'>
                             {% if request.user.pk not in user.profile.followed_by %}
                                 Follow    
                             {% else %}
