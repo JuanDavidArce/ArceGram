@@ -3,6 +3,21 @@
     border-color: transparent;
 }
 
+.like-icon {
+    color: rgb(0, 0, 0);
+}
+
+.like-icon:hover{
+    color:red;
+}
+
+.dislike-icon {
+    color: red;
+}
+
+.dislike-icon:hover {
+    color: pink;
+}
 .comment {
     height:  100px;
     border: 1px solid #ddd;
@@ -72,3 +87,4 @@
     border-color:transparent;
     color:white;
 }
+
