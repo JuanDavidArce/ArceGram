@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'posts',
     'users',
     'chat',
+    'channels',
 
 ]
 
@@ -79,7 +80,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'ArceGram.wsgi.application'
+ASGI_APPLICATION = 'ArceGram.asgi.application'
 
 
 # Database
