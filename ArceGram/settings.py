@@ -150,3 +150,11 @@ MEDIA_URL='/media/'
 LOGIN_URL='/users/login/'
 LOGIN_REDIRECT_URL='/'
 LOGOUT_REDIRECT_URL=LOGIN_URL
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',
+        # 'CONFIG': {
+        #     'hosts': [('127.0.0.1', 6379)],
+        # }
+    }
+}

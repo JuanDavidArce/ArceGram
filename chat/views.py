@@ -1,5 +1,14 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+from chat.models import Thread
+
+
+@login_required
 def messages_page(request):
-    return render(request,"chat/start_point_messages.html")
+    threads = Thread.objects.by_user(user=request.user).prefetch_related('chatmessage_thread').order_by('timestamp')
+    context = {
+        'Threads': threads
+    }
+    return render(request, 'chat/messages.html', context)
