@@ -101,14 +101,14 @@
                                     <input type="hidden" name="post_id" value="{{ post.pk }}">
                                     <input type="hidden" name="username" value="{{ user.username }}">
                                     <button type="submit hidden" style="background-color: transparent;border-color:transparent;">
-                                        <i class="fa fa-trash" aria-hidden="true" style="color: red;"></i>
+                                        <i class="fa fa-trash trash-icon" aria-hidden="true"></i>
                                     </button>
                                 </form>
         
                                 <form action="{% url "posts:update" post.pk %}" method="POST"  style="background-color: transparent;border-color:transparent;">
                                     {% csrf_token %}
                                     <button type="submit hidden" style="background-color: transparent;border-color:transparent;">
-                                        <i class="fas fa-arrow-alt-circle-up" aria-hidden="true" style="color: rgb(0, 255, 0);"></i>
+                                        <i class="fas fa-arrow-alt-circle-up update-icon" aria-hidden="true"></i>
                                     </button>
                                 </form>
                             </div>
