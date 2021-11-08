@@ -12,6 +12,10 @@ urlpatterns=[
         route='',
         view=views.messages_page,
         name='chat'),
+    path(
+        route='/threads',
+        view=views.New_thread.as_view(),
+        name='threads')
 
 
 ]

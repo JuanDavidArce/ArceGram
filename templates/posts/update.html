@@ -11,7 +11,7 @@
             <div class="col-6 pt-3 pb-3" id="profile-box">
                 <h4 class="mb-4">Update your post!</h4>
 
-                <form method="POST" >
+                <form method="POST"  >
                     {% csrf_token %}
 
                    
@@ -25,7 +25,9 @@
                             value="{{ post.title }}"
                         >
                         <div class="invalid-feedback">
-                            {% for error in form.title.errors %}{{ error }}{% endfor %}
+                            {% for error in form.title.errors %}
+                                {{ error }}
+                            {% endfor %}
                         </div>
                     </div>
                     {# description field #}

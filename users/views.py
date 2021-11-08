@@ -68,6 +68,7 @@ class UserDetailView(LoginRequiredMixin,DetailView):
         return redirect('users:detail',user.username)
 
 
+
 class SignupView(FormView):
     """Users signup view"""
     template_name='users/signup.html'

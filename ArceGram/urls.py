@@ -32,3 +32,4 @@ urlpatterns = [
     path('users/',include(('users.urls','users'),namespace='users')),
 
 ]+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+admin.site.site_header = 'ArceGram Administration'
