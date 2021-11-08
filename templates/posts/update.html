@@ -19,30 +19,33 @@
                     <div class="form-group">
                         <label>Title</label>
                         <input
-                            class="form-control {% if form.title.errors %}is-invalid{% endif %}"
+                            class="form-control"
                             type="text"
                             name="title"
                             value="{{ post.title }}"
+                            required="True"
                         >
-                        <div class="invalid-feedback">
+                        <!-- <div class="invalid-feedback">
                             {% for error in form.title.errors %}
                                 {{ error }}
                             {% endfor %}
-                        </div>
+                        </div> -->
                     </div>
                     {# description field #}
                     <div class="form-group">
                         <label>Description</label>
                         <textarea 
-                            class="form-control {% if form.description.errors %}is-invalid{% endif %}" 
+                            required="True"
+                            class="form-control " 
                             name="description">{{ post.description }}
+                            
                         </textarea>
                         
-                        <div class="invalid-feedback">
+                        <!-- <div class="invalid-feedback">
                             {% for error in form.description.errors  %}
                                 {{error}}
                             {% endfor %}
-                        </div>
+                        </div> -->
                     </div>
 
                     <button type="submit" class="btn btn-danger btn-block mt-5" >Update!</button>

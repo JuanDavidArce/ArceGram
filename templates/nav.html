@@ -8,6 +8,7 @@
 
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">
+                <!-- detail user -->
 
                 <li class="nav-item">
                     <a href="{% url 'users:detail' request.user.username %}">
@@ -18,27 +19,40 @@
                         {% endif %}
                     </a>
                 </li>
-
+                <!-- Create post -->
                 <li class="nav-item nav-icon">
                     <a href="{% url 'posts:create' %}">
                         <i class="fas fa-plus new-post-icon"></i>
                     </a>
                 </li>
-
+                <!-- Logout -->
                 <li class="nav-item nav-icon">
                     <a href="{% url 'users:logout' %}">
                         <i class="fas fa-sign-out-alt"></i>
                     </a>
                 </li>
 
+                <!-- Chat -->
                 <li class="nav-item nav-icon">
                     <a href="{% url 'chat:chat' %}">
                         <i class="fa fa-comments" aria-hidden="true"></i>
                     </a>
                 </li>
 
-
+                
             </ul>
+            <!-- Search user -->
+            <form action="{% url 'users:search' %}" method="GET" class="form-inline">
+                {% csrf_token %}
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">@</span>
+                  </div>
+                  <input name="user_to_search" type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+                <button type="submit" class="btn btn-secondary">Search</button>
+
+            </form>
         </div>
     </div>
 </nav>
