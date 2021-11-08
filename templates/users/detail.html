@@ -54,11 +54,12 @@
                         </form>
                     <!-- Chat button -->
 
-                        <form method="POST" action="{% url 'chat:threads' %}" class="ml-5 btn btn-sm btn-danger">
+                        <form method="POST" action="{% url 'chat:threads' %}" class="ml-5 btn btn-sm btn-success">
                             {% csrf_token %}
                             <input type='hidden' name='first_person_id' value="{{ user.pk }}">
                             <input type='hidden' name='second_person_id' value="{{ request.user.pk }}">
-                            <button class="button-message" type="submit hidden">
+                            <button class="button-message" type="submit hidden" style="background-color: transparent;
+                            border-color:transparent; color:white;">
                                 Message
                             </button>
                         </form>

@@ -82,13 +82,8 @@
     margin-top: 8em;
 }
 
-.button-follow-unfollow {
-    background-color: transparent;
-    border-color:transparent;
-    color:white;
-}
 
-.button-message {
+.button-follow-unfollow {
     background-color: transparent;
     border-color:transparent;
     color:white;
