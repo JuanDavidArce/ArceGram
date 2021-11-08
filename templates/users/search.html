@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block container %}
+    <div class="row-12"><h3>Results of search <i class="fa fa-users" aria-hidden="true"></i></h3></div>
+    <div class="row-12">
+        <div class="list-group">
+            <div class="list-group-item" style="background-color: rgb(255, 16, 16);"><h5 style="color: white;">Username</h5></div>
+            {% for user in search  %}
+                <a href="{% url "users:detail" user.username %}" class="list-group-item">{{ user.username }}</a>
+            {% endfor %}
+    
+        </div>
+    </div>
+    
+    
+{% endblock container %}

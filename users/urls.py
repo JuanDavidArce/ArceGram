@@ -41,7 +41,12 @@ urlpatterns=[
         view=views.UserFollowing.as_view(),
         name='following'),
 
-    #Posts
+    path(
+        route='search',
+        view=views.UserSearch.as_view(),
+        name='search'),
+
+    # Posts
     path(
         route='profile/<str:username>/',
         view=views.UserDetailView.as_view(),

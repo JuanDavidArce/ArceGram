@@ -19,6 +19,14 @@ from posts.models import Post
 from users.forms import  SignupForm
 
 
+class UserSearch(LoginRequiredMixin,ListView):
+    """Return a list of users found"""
+    template_name= 'users/search.html'
+    Model= User
+    context_object_name='search'
+    def get_queryset(self):
+        return User.objects.filter(username__contains=self.request.GET['user_to_search'])
+
 
 class UserFollowing(LoginRequiredMixin,ListView):
     """Return All Following Users"""
