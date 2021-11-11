@@ -90,18 +90,22 @@
                         </h2>
 
                         <div class="row mt-2" style="font-size: 1.2em">
-                            <div class="col-sm-4">
+                            <div class="col-sm-3">
                                 <b>{{ user.profile.published }}   </b> Posts
                             </div>
                             
                             {% if user == request.user %}
                             <!-- Followers link -->
-                                <div class="col-sm-4">
+                                <div class="col-sm-3">
                                     <a href="{% url 'users:followers' user.pk %}"><b>{{ user.profile.followed_by|length }}</b> Followers</a>
                                 </div>
                             <!-- Following link -->
-                                <div class="col-sm-4">
+                                <div class="col-sm-3">
                                     <a href="{% url 'users:following' user.pk %}"><b>{{ user.profile.following_to|length }}</b> Following</a>
+                                </div>
+                            <!-- Blocked users link -->
+                                <div class="col-sm-3">
+                                    <a href="{% url 'users:blocked_users' user.pk %}"><b>{{ user.profile.blocked_to|length }}</b> Blocked</a>
                                 </div>
                             {% else %}
                                 <div class="col-sm-4">

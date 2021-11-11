@@ -24,6 +24,17 @@ from users.models import Blocked
 from users.forms import  SignupForm
 # Create your views here.
 
+
+
+class UserBlockedList(LoginRequiredMixin,ListView):
+    """Return All Blocked users"""
+    template_name='users/blocked_users.html'
+    Model=Blocked
+    context_object_name='blocked_users'
+    def get_queryset(self):
+        return Blocked.objects.filter(user_id=self.request.user.pk)
+
+
 class UserBlock(LoginRequiredMixin,View):
     """Block or Unlock a user"""
 
