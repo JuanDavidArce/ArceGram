@@ -1,12 +1,12 @@
 {% extends 'users/base.html' %}
 
 {% block head_content %}
-    <title>ArceGram Sign In</title>
+    <title>ArceGram Inicio de sesion</title>
 {% endblock  %}
 
 {% block container %}
     {% if form.errors %}
-        <p class="alert alert-danger">Your username and password didn't mathch please try again</p>
+        <p class="alert alert-danger">Tu nombre de usuario y contraseña no coinciden, intenta nuevamente</p>
     {% endif %}
     
     <form  method = "POST" action="{% url 'users:login' %}">
@@ -20,8 +20,8 @@
             <input class="form-control" type="password" placeholder="Password" name="password">
         </div>
         
-        <button class="btn btn-danger btn-block mt-5" type="submit">Sign in!</button>
+        <button class="btn btn-danger btn-block mt-5" type="submit">Iniciar sesion!</button>
     </form>
-    <p class="mt-4">Don't you have an account yet? <a href="{% url 'users:signup' %}">Sign up here.</a></p>
+    <p class="mt-4">No tienes una cuenta todavia? <a href="{% url 'users:signup' %}">Registrate aqui!.</a></p>
 
 {% endblock  %}

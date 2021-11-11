@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block head_content %}
-    <title>Create new post</title>
+    <title>Crear nuevo post</title>
 {% endblock %}
 
 {% block container %}
@@ -9,7 +9,7 @@
     <div class="container">
         <div class="row justify-content-md-center">
             <div class="col-6 pt-3 pb-3" id="profile-box">
-                <h4 class="mb-4">Create new post!</h4>
+                <h4 class="mb-4">Crear un nuevo post!</h4>
 
                 <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
@@ -24,7 +24,7 @@
                             class="form-control {% if form.title.errors %}is-invalid{% endif %}"
                             type="text"
                             name="title"
-                            placeholder="Title"
+                            placeholder="Titulo"
                         >
                         <div class="invalid-feedback">
                             {% for error in form.title.errors %}{{ error }}{% endfor %}
@@ -32,7 +32,7 @@
                     </div>
                     {# description field #}
                     <div class="form-group">
-                        <label>Description</label>
+                        <label>Descripcion</label>
                         <textarea 
                             class="form-control {% if form.description.errors %}is-invalid{% endif %}" 
                             name="description">
@@ -47,12 +47,12 @@
 
                     {# Photo field #}
                     <div class="form-group">
-                        <label>Choose your photo:</label>
+                        <label>Elige tu foto:</label>
                         <input
                             class="form-control {% if form.photo.errors %}is-invalid{% endif %}"
                             type="file"
                             name="photo"
-                            placeholder="photo"
+                            placeholder="foto"
                             
 
                         >
@@ -61,7 +61,7 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="btn btn-danger btn-block mt-5" >Publish!</button>
+                    <button type="submit" class="btn btn-danger btn-block mt-5" >Publicar!</button>
                 </form>
             </div>
         </div>

@@ -32,14 +32,14 @@
                                     class="ml-5 btn btn-sm btn-outline-danger"
                 
                                 >
-                                    Edit profile
+                                    Editar Perfil
                                 </a>
                                 <a
                                     href="{% url "users:delete_profile" user.pk  %}"
                                     class="ml-5 btn btn-sm btn-outline-danger"
                 
                                 >
-                                    Delete Account
+                                    Borrar Cuenta
                                 </a>
                             {% else %}
                             <!-- Follow-Following button -->
@@ -49,9 +49,9 @@
                                     <input type='hidden' name='user_follower' value="{{ request.user.pk }}">
                                     <button class="button-follow-unfollow" type='submit hidden'>
                                     {% if request.user.pk not in user.profile.followed_by %}
-                                        Follow    
+                                        Seguir    
                                     {% else %}
-                                        Following
+                                        Siguiendo
                                     {% endif %}
                                     </button>
                                 </form>
@@ -63,7 +63,7 @@
                                     <input type='hidden' name='second_person_id' value="{{ request.user.pk }}">
                                     <button class="button-message" type="submit hidden" style="background-color: transparent;
                                     border-color:transparent; color:white;">
-                                        Message
+                                        Mensaje
                                     </button>
                                 </form>
                             <!-- Block button -->
@@ -76,9 +76,9 @@
                                     <button class="button-message" type="submit hidden" style="background-color: transparent;
                                     border-color:transparent; color:white;">
                                     {% if user.pk not in request.user.profile.blocked_to %}
-                                        Block  
+                                        Bloquear 
                                     {% else %}
-                                        Unlock
+                                        Desbloquear
                                     {% endif %}
                                         
                                     </button>
@@ -97,22 +97,22 @@
                             {% if user == request.user %}
                             <!-- Followers link -->
                                 <div class="col-sm-3">
-                                    <a href="{% url 'users:followers' user.pk %}"><b>{{ user.profile.followed_by|length }}</b> Followers</a>
+                                    <a href="{% url 'users:followers' user.pk %}"><b>{{ user.profile.followed_by|length }}</b> Seguidores</a>
                                 </div>
                             <!-- Following link -->
                                 <div class="col-sm-3">
-                                    <a href="{% url 'users:following' user.pk %}"><b>{{ user.profile.following_to|length }}</b> Following</a>
+                                    <a href="{% url 'users:following' user.pk %}"><b>{{ user.profile.following_to|length }}</b> Siguiendo</a>
                                 </div>
                             <!-- Blocked users link -->
                                 <div class="col-sm-3">
-                                    <a href="{% url 'users:blocked_users' user.pk %}"><b>{{ user.profile.blocked_to|length }}</b> Blocked</a>
+                                    <a href="{% url 'users:blocked_users' user.pk %}"><b>{{ user.profile.blocked_to|length }}</b> Bloqueados</a>
                                 </div>
                             {% else %}
                                 <div class="col-sm-4">
-                                    <b>{{ user.profile.followed_by|length }}</b> Followers
+                                    <b>{{ user.profile.followed_by|length }}</b> Seguidores
                                 </div>
                                 <div class="col-sm-4">
-                                    <b>{{ user.profile.following_to|length }}</b> Following
+                                    <b>{{ user.profile.following_to|length }}</b> Siguiendo
                                 </div>
                             {% endif %}
                             
@@ -175,7 +175,7 @@
             
         {% else %}
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                Sorry! you are not allow to see the profile of <strong>@{{ user.username }}</strong>
+                Lo sentimos! no tienes permiso para ver este perfil <strong>@{{ user.username }}</strong>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>

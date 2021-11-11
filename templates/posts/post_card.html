@@ -51,7 +51,7 @@
 
         <div class="container comment">
             {% if not post.comments %}
-                Whithout Comments
+                Sin comentarios...
             {% endif %}
             {% for comment in post.comments  %}
                 {% if request.user.pk not in comment.user.profile.blocked_to and comment.user.pk not in request.user.profile.blocked_to %}
@@ -108,7 +108,7 @@
                 class="form-control" 
                 name="comment"> 
             </textarea>
-            <button class="btn btn-danger button-danger" type="submit">Comment <i class="fa fa-comments" aria-hidden="true"></i></button>
+            <button class="btn btn-danger button-danger" type="submit">Comentar <i class="fa fa-comments" aria-hidden="true"></i></button>
             
         </form>
          

@@ -1,21 +1,21 @@
 {% extends "base.html" %}
 
 {% block head_content %}
-    <title>Update a comment</title>
+    <title>Actualizar comentario</title>
 {% endblock %}
 
 {% block container %}
     <div class="container">
         <div class="row justify-content-md-center">
             <div class="col-6 pt-3 pb-3" id="profile-box">
-                <h4 class="mb-4">Update your comment! <i class="fa fa-comment comment-icon" aria-hidden="true"></i></h4>
+                <h4 class="mb-4">Actualiza tu comentario! <i class="fa fa-comment comment-icon" aria-hidden="true"></i></h4>
 
                 <form method="POST" >
                     {% csrf_token %}
 
                     {# Comment field #}
                     <div class="form-group">
-                        <label>Comment</label>
+                        <label>Comentario</label>
                         <textarea 
                             class="form-control {% if form.comment.errors %}is-invalid{% endif %}" 
                             name="comment">{{ comment.comment }}
@@ -28,7 +28,7 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="btn btn-danger btn-block mt-5" >Update!</button>
+                    <button type="submit" class="btn btn-danger btn-block mt-5" >Actualizar!</button>
                 </form>
             </div>
         </div>

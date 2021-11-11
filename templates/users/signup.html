@@ -1,7 +1,7 @@
 {% extends "users/base.html" %}
 
 {% block head_content %}
-    <title>ArceGram Sign Up</title>
+    <title>ArceGram Registro</title>
 {% endblock  %}
 
 {% block container %}
@@ -11,7 +11,7 @@
         {% csrf_token %}
 
         {{ form.as_p }}
-        <button class="btn btn-danger btn-block mt-5" type="submit">Register</button>
+        <button class="btn btn-danger btn-block mt-5" type="submit">Registrarse!</button>
 
 
     </form>
