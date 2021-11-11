@@ -7,15 +7,20 @@
         <div class="list-group">
             <div class="list-group-item ban" ><h5 style="color: white;">Username</h5></div>
             {% for follower in followers  %}
+                {% if request.user.pk not in follower.follower.profile.blocked_to %}
 
-                <a href="{% url 'users:detail' follower.follower.username %}" class="list-group-item ">
-                    {% if follower.follower.profile.picture %}
-                        <img src="{{ follower.follower.profile.picture.url }}" height="35" width="35" class="d-inline-block align-top rounded-circle"/>
-                    {% else %}
-                        <img src="{% static 'img/default-profile.png' %}" height="35" width="35" class="d-inline-block align-top rounded-circle"/>
-                    {% endif %}
-                    {{ follower.follower.first_name }} {{ follower.follower.last_name }} @{{ follower.follower.username }}
-                </a>
+                    <a href="{% url 'users:detail' follower.follower.username %}" class="list-group-item ">
+                        {% if follower.follower.profile.picture %}
+                            <img src="{{ follower.follower.profile.picture.url }}" height="35" width="35" class="d-inline-block align-top rounded-circle"/>
+                        {% else %}
+                            <img src="{% static 'img/default-profile.png' %}" height="35" width="35" class="d-inline-block align-top rounded-circle"/>
+                        {% endif %}
+                        {{ follower.follower.first_name }} {{ follower.follower.last_name }} @{{ follower.follower.username }}
+                    </a>
+                    
+                {% endif %}
+   
+       
                 
             {% endfor %}
     

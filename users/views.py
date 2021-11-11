@@ -1,7 +1,9 @@
 """User views"""
 
 #Django
+from django.core.exceptions import ViewDoesNotExist
 from django.db.models.base import Model
+import users
 from users.models import Profile, Follower
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect, render
@@ -11,12 +13,36 @@ from django.urls.base import reverse_lazy,reverse
 from django.views.generic import DetailView,FormView,UpdateView,DeleteView,ListView
 from django.urls import reverse_lazy
 from django.contrib.auth import views as auth_views
+from django.views import View
+
 
 #Models
 from django.contrib.auth.models import User
 from posts.models import Post
+from users.models import Blocked
 #Forms
 from users.forms import  SignupForm
+# Create your views here.
+
+class UserBlock(LoginRequiredMixin,View):
+    """Block or Unlock a user"""
+
+
+    def post(self, request, *args, **kwargs):
+        user= User.objects.get(id=request.POST['user_id'])
+        userToBlock = User.objects.get(id=request.POST['to_block_id'])
+        # print(Blocked.objects.all().filter(user_id=user.pk).filter(blocked_id=request.POST['to_block_id']))
+    
+        if not  Blocked.objects.all().filter(user_id=user.pk).filter(blocked_id=request.POST['to_block_id']) :
+            newBlocked= Blocked(user_id=user.pk,profile_id=user.profile.pk,blocked_id=request.POST['to_block_id'])
+            newBlocked.save()
+            # print(newBlocked)
+        else:
+            Blocked.objects.get(user_id=user.pk,profile_id=user.profile,blocked_id=request.POST['to_block_id']).delete()
+            
+        return redirect("users:detail",userToBlock.username)
+    
+
 
 
 class UserSearch(LoginRequiredMixin,ListView):

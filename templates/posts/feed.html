@@ -10,7 +10,11 @@
         <div class="row">
 
             {% for post in posts %}
-                {% include "posts/post_card.html" %}
+            <!-- Validate if a user has been blocked and then does not show the post -->
+                {% if request.user.pk not in post.user.profile.blocked_to and post.user.pk not in request.user.profile.blocked_to %}
+                    
+                    {% include "posts/post_card.html" %}
+                {% endif %}
             {% endfor %}
 
         </div>

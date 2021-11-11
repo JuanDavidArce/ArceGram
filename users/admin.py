@@ -5,9 +5,10 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
 #Models
-from users.models import Profile
+from users.models import Profile, Blocked,Follower
 
 # Register your models here.
+
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
     """Profile admin"""
@@ -45,3 +46,5 @@ class UserAdmin(BaseUserAdmin):
 
 admin.site.unregister(User)
 admin.site.register(User,UserAdmin)
+admin.site.register(Blocked)
+admin.site.register(Follower)

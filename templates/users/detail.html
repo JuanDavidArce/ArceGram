@@ -4,149 +4,178 @@
 <title>@{{ user.username }} | ArceGram</title>
 {% endblock %}
 
-{% block container %}
 
-    <div class="container mb-5 profile-user">
-        <div class="row">
 
-            <div class="col-sm-4 d-flex justify-content-center">
-                <img
-                    src="{{ user.profile.picture.url }}"
-                    alt="@{{ user.username }}"
-                    class="rounded-circle"
-                    width="150px"
-                    height="150px"
-                />
-            </div>
-         
 
-            <div class="col-sm-8">
-                <h2 style="font-weight: 100;">
-                    {{ user.username }}
-                    {% if user == request.user %}
-                        <a
-                            href="{% url "users:update_profile" %}"
-                            class="ml-5 btn btn-sm btn-outline-danger"
-          
-                        >
-                            Edit profile
-                        </a>
-                        <a
-                            href="{% url "users:delete_profile" user.pk  %}"
-                            class="ml-5 btn btn-sm btn-outline-danger"
-          
-                        >
-                            Delete Account
-                        </a>
-                    {% else %}
-                     <!-- Follow-Following button -->
-                        <form  method='POST' action="{% url 'users:detail' user.username %}" class="ml-5 btn btn-sm btn-danger">
-                            {% csrf_token %}
-                            <input type='hidden' name='user_to_follow' value="{{ user.pk }}">
-                            <input type='hidden' name='user_follower' value="{{ request.user.pk }}">
-                            <button class="button-follow-unfollow" type='submit hidden'>
-                            {% if request.user.pk not in user.profile.followed_by %}
-                                Follow    
+    {% block container %}
+        {% if request.user.pk not in user.profile.blocked_to %}
+            <div class="container mb-5 profile-user">
+                <div class="row">
+
+                    <div class="col-sm-4 d-flex justify-content-center">
+                        <img
+                            src="{{ user.profile.picture.url }}"
+                            alt="@{{ user.username }}"
+                            class="rounded-circle"
+                            width="150px"
+                            height="150px"
+                        />
+                    </div>
+                
+
+                    <div class="col-sm-8">
+                        <h2 style="font-weight: 100;">
+                            {{ user.username }}
+                            {% if user == request.user %}
+                                <a
+                                    href="{% url "users:update_profile" %}"
+                                    class="ml-5 btn btn-sm btn-outline-danger"
+                
+                                >
+                                    Edit profile
+                                </a>
+                                <a
+                                    href="{% url "users:delete_profile" user.pk  %}"
+                                    class="ml-5 btn btn-sm btn-outline-danger"
+                
+                                >
+                                    Delete Account
+                                </a>
                             {% else %}
-                                Following
-                            {% endif %}
-                            </button>
-                        </form>
-                    <!-- Chat button -->
+                            <!-- Follow-Following button -->
+                                <form  method='POST' action="{% url 'users:detail' user.username %}" class="ml-5 btn btn-sm btn-danger">
+                                    {% csrf_token %}
+                                    <input type='hidden' name='user_to_follow' value="{{ user.pk }}">
+                                    <input type='hidden' name='user_follower' value="{{ request.user.pk }}">
+                                    <button class="button-follow-unfollow" type='submit hidden'>
+                                    {% if request.user.pk not in user.profile.followed_by %}
+                                        Follow    
+                                    {% else %}
+                                        Following
+                                    {% endif %}
+                                    </button>
+                                </form>
+                            <!-- Chat button -->
 
-                        <form method="POST" action="{% url 'chat:threads' %}" class="ml-5 btn btn-sm btn-success">
-                            {% csrf_token %}
-                            <input type='hidden' name='first_person_id' value="{{ user.pk }}">
-                            <input type='hidden' name='second_person_id' value="{{ request.user.pk }}">
-                            <button class="button-message" type="submit hidden" style="background-color: transparent;
-                            border-color:transparent; color:white;">
-                                Message
-                            </button>
-                        </form>
+                                <form method="POST" action="{% url 'chat:threads' %}" class="ml-5 btn btn-sm btn-primary">
+                                    {% csrf_token %}
+                                    <input type='hidden' name='first_person_id' value="{{ user.pk }}">
+                                    <input type='hidden' name='second_person_id' value="{{ request.user.pk }}">
+                                    <button class="button-message" type="submit hidden" style="background-color: transparent;
+                                    border-color:transparent; color:white;">
+                                        Message
+                                    </button>
+                                </form>
+                            <!-- Block button -->
+
+                                
+                                <form method="POST" action="{% url 'users:block' %}" class="ml-5 btn btn-sm btn-dark">
+                                    {% csrf_token %}
+                                    <input type='hidden' name='user_id' value="{{ request.user.pk }}">
+                                    <input type='hidden' name='to_block_id' value="{{ user.pk }}">
+                                    <button class="button-message" type="submit hidden" style="background-color: transparent;
+                                    border-color:transparent; color:white;">
+                                    {% if user.pk not in request.user.profile.blocked_to %}
+                                        Block  
+                                    {% else %}
+                                        Unlock
+                                    {% endif %}
+                                        
+                                    </button>
+                                </form>
 
 
-                       
-                    {% endif %}
-                </h2>
-
-                <div class="row mt-2" style="font-size: 1.2em">
-                    <div class="col-sm-4">
-                        <b>{{ user.profile.published }}   </b> Posts
-                    </div>
-                    
-                    {% if user == request.user %}
-                    <!-- Followers link -->
-                        <div class="col-sm-4">
-                            <a href="{% url 'users:followers' user.pk %}"><b>{{ user.profile.followed_by|length }}</b> Followers</a>
-                        </div>
-                    <!-- Following link -->
-                        <div class="col-sm-4">
-                            <a href="{% url 'users:following' user.pk %}"><b>{{ user.profile.following_to|length }}</b> Following</a>
-                        </div>
-                    {% else %}
-                        <div class="col-sm-4">
-                            <b>{{ user.profile.followed_by|length }}</b> Followers
-                        </div>
-                        <div class="col-sm-4">
-                            <b>{{ user.profile.following_to|length }}</b> Following
-                        </div>
-                    {% endif %}
-                    
-                </div>
-                <div class="row mt-4">
-                    <div class="col-sm-12">
-                        <p>{{ user.profile.biography }}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <hr>
-
-    <div class="container" id="user-posts">
-        <div class="row mt-3">
-            <!-- Show posts and its options -->
-
-            {% for post in posts %}
-            <div class="col-sm-4 pt-5 pb-5 pr-5 pl-5 d-flex justify-content-center">
-                <div>
-                    {% if user == request.user %}
-                        <div class="container">
                             
-                            <div class="row">
-                                <!-- Delete post -->
-                                <form action="{% url "posts:delete" %}" method="POST"  style="background-color: transparent;border-color:transparent;">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="post_id" value="{{ post.pk }}">
-                                    <input type="hidden" name="username" value="{{ user.username }}">
-                                    <button type="submit hidden" style="background-color: transparent;border-color:transparent;">
-                                        <i class="fa fa-trash trash-icon" aria-hidden="true"></i>
-                                    </button>
-                                </form>
-                                <!-- Update post -->
-                                <form action="{% url "posts:update" post.pk %}" method="POST"  style="background-color: transparent;border-color:transparent;">
-                                    {% csrf_token %}
-                                    <button type="submit hidden" style="background-color: transparent;border-color:transparent;">
-                                        <i class="fas fa-arrow-alt-circle-up update-icon" aria-hidden="true"></i>
-                                    </button>
-                                </form>
+                            {% endif %}
+                        </h2>
+
+                        <div class="row mt-2" style="font-size: 1.2em">
+                            <div class="col-sm-4">
+                                <b>{{ user.profile.published }}   </b> Posts
+                            </div>
+                            
+                            {% if user == request.user %}
+                            <!-- Followers link -->
+                                <div class="col-sm-4">
+                                    <a href="{% url 'users:followers' user.pk %}"><b>{{ user.profile.followed_by|length }}</b> Followers</a>
+                                </div>
+                            <!-- Following link -->
+                                <div class="col-sm-4">
+                                    <a href="{% url 'users:following' user.pk %}"><b>{{ user.profile.following_to|length }}</b> Following</a>
+                                </div>
+                            {% else %}
+                                <div class="col-sm-4">
+                                    <b>{{ user.profile.followed_by|length }}</b> Followers
+                                </div>
+                                <div class="col-sm-4">
+                                    <b>{{ user.profile.following_to|length }}</b> Following
+                                </div>
+                            {% endif %}
+                            
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-sm-12">
+                                <p>{{ user.profile.biography }}</p>
                             </div>
                         </div>
-        
-                    {% endif %}
-
-                    <!-- Detail post -->
-                    <a href="{% url "posts:detail" post.pk %}" class="border">
-                        <img src="{{ post.photo.url }}" alt="{{ post.title }}" class="img-fluid"/>
-                        {{ post.title }}
-                    </a>
-
+                    </div>
                 </div>
-
             </div>
-            {% endfor %}
-        </div>
-    </div>
 
-{% endblock %}
+            <hr>
+
+            <div class="container" id="user-posts">
+                <div class="row mt-3">
+                    <!-- Show posts and its options -->
+
+                    {% for post in posts %}
+                    <div class="col-sm-4 pt-5 pb-5 pr-5 pl-5 d-flex justify-content-center">
+                        <div>
+                            {% if user == request.user %}
+                                <div class="container">
+                                    
+                                    <div class="row">
+                                        <!-- Delete post -->
+                                        <form action="{% url "posts:delete" %}" method="POST"  style="background-color: transparent;border-color:transparent;">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="post_id" value="{{ post.pk }}">
+                                            <input type="hidden" name="username" value="{{ user.username }}">
+                                            <button type="submit hidden" style="background-color: transparent;border-color:transparent;">
+                                                <i class="fa fa-trash trash-icon" aria-hidden="true"></i>
+                                            </button>
+                                        </form>
+                                        <!-- Update post -->
+                                        <form action="{% url "posts:update" post.pk %}" method="POST"  style="background-color: transparent;border-color:transparent;">
+                                            {% csrf_token %}
+                                            <button type="submit hidden" style="background-color: transparent;border-color:transparent;">
+                                                <i class="fas fa-arrow-alt-circle-up update-icon" aria-hidden="true"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                
+                            {% endif %}
+
+                            <!-- Detail post -->
+                            <a href="{% url "posts:detail" post.pk %}" class="border">
+                                <img src="{{ post.photo.url }}" alt="{{ post.title }}" class="img-fluid"/>
+                                {{ post.title }}
+                            </a>
+
+                        </div>
+
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            
+        {% else %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                Sorry! you are not allow to see the profile of <strong>@{{ user.username }}</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endif %}
+ 
+    {% endblock %}

@@ -45,6 +45,10 @@ urlpatterns=[
         route='search',
         view=views.UserSearch.as_view(),
         name='search'),
+    path(
+        route='block',
+        view=views.UserBlock.as_view(),
+        name='block'),
 
     # Posts
     path(
