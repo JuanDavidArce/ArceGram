@@ -53,6 +53,10 @@ urlpatterns=[
         route='me/profile/blocked_users/<int:pk>',
         view=views.UserBlockedList.as_view(),
         name='blocked_users'),
+    path(
+        route='privacity',
+        view=views.UserPrivacity.as_view(),
+        name='privacity'),
 
     # Posts
     path(
