@@ -24,9 +24,19 @@ class Profile(models.Model):
     def following_to(self):
         return [foll.user_id for foll in Follower.objects.filter(follower_id=self.user.pk)]
 
+
     @property
     def published(self):
         return len([post for post in post_models.Post.objects.filter(user_id=self.user.pk)])
+
+    @property
+    def blocked_by(self):
+        return [block.user_id for block in Blocked.objects.filter(blocked_id=self.user.pk)]
+    
+
+    @property
+    def blocked_to(self):
+        return [block.blocked_id for block in Blocked.objects.filter(user_id=self.user.pk)]
 
 
     def __str__(self) :
@@ -39,3 +49,8 @@ class Follower(models.Model):
     profile = models.ForeignKey(Profile,on_delete=models.CASCADE)
     follower = models.ForeignKey(User,on_delete=models.CASCADE, related_name="Followers")
 
+
+class Blocked(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE, related_name="User")
+    profile = models.ForeignKey(Profile,on_delete=models.CASCADE)
+    blocked = models.ForeignKey(User,on_delete=models.CASCADE, related_name="Blocked")

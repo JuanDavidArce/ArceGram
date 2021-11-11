@@ -5,17 +5,23 @@
     <div class="row-12"><h3>Following <i class="fa fa-users" aria-hidden="true"></i></h3></div>
     <div class="row-12">
         <div class="list-group">
-            <div class="list-group-item" style="background-color: rgb(255, 16, 16);"><h5 style="color: white;">Username</h5></div>
+            <div class="list-group-item ban" ><h5 style="color: white;">Username</h5></div>
             {% for follow in following  %}
-
-            <a href="{% url 'users:detail' follow.user.username %}" class="list-group-item ">
-                {% if follow.profile.picture %}
-                    <img src="{{ follow.profile.picture.url }}" height="35" width="35" class="d-inline-block align-top rounded-circle"/>
-                {% else %}
-                    <img src="{% static 'img/default-profile.png' %}" height="35" width="35" class="d-inline-block align-top rounded-circle"/>
+                {% if request.user.pk not in follow.user.profile.blocked_to %}
+                    
+                    <a href="{% url 'users:detail' follow.user.username %}" class="list-group-item ">
+                        {% if follow.profile.picture %}
+                            <img src="{{ follow.profile.picture.url }}" height="35" width="35" class="d-inline-block align-top rounded-circle"/>
+                        {% else %}
+                            <img src="{% static 'img/default-profile.png' %}" height="35" width="35" class="d-inline-block align-top rounded-circle"/>
+                        {% endif %}
+                        {{ follow.user.first_name }} {{ follow.user.last_name }} @{{ follow.user.username }}
+                    </a>
                 {% endif %}
-                {{ follow.user.first_name }} {{ follow.user.last_name }} @{{ follow.user.username }}
-            </a>
+                    
+        
+                    
+           
 
             {% endfor %}
     
