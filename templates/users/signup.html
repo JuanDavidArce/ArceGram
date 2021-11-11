@@ -11,6 +11,7 @@
         {% csrf_token %}
 
         {{ form.as_p }}
+        Al hacer click en registrarse aceptas nuestros <a href="{% url 'users:privacity' %}">terminos de privacidad</a>
         <button class="btn btn-danger btn-block mt-5" type="submit">Registrarse!</button>
 
 

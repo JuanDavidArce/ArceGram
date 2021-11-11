@@ -10,7 +10,7 @@ from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls.base import reverse_lazy,reverse
-from django.views.generic import DetailView,FormView,UpdateView,DeleteView,ListView
+from django.views.generic import DetailView,FormView,UpdateView,DeleteView,ListView,TemplateView
 from django.urls import reverse_lazy
 from django.contrib.auth import views as auth_views
 from django.views import View
@@ -24,6 +24,8 @@ from users.models import Blocked
 from users.forms import  SignupForm
 # Create your views here.
 
+class UserPrivacity(TemplateView):
+    template_name='users/privacity.html'
 
 
 class UserBlockedList(LoginRequiredMixin,ListView):
