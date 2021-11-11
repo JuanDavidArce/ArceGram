@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block head_content %}
-<title>@{{ request.user.username }} | Update profiles</title>
+<title>@{{ request.user.username }} | Actualizar Perfil</title>
 {% endblock %}
 
 {% block container %}
@@ -38,11 +38,11 @@
                 <hr><br>
                 {#Website field#}
                 <div class="form-group">
-                    <label>Website</label>
+                    <label>Sitio Web</label>
                     <input class="form-control {% if form.website.errors %}is-invalid{% endif %}" 
                     type="text" 
                     name="website" 
-                    placeholder="Website" 
+                    placeholder="Sitio Web" 
                     value="{% if form.errors %}{{ form.website.value }}{% else %}{{ profile.website }}{% endif %}"/>
                     <div class="invalid-feedback">
                         {% for error in form.website.errors  %}
@@ -53,10 +53,10 @@
                 </div>
                  {#biography field#}
                 <div class="form-group">
-                    <label>Biography</label>
+                    <label>Biografia</label>
                     <textarea 
                     class="form-control {% if form.biography.errors %}is-invalid{% endif %}" 
-                    name="biography">{% if form.errors %}{{form.biography.value}}{% else %}{{profile.biography}}{% endif %}</textarea>
+                    name="biografia">{% if form.errors %}{{form.biography.value}}{% else %}{{profile.biography}}{% endif %}</textarea>
                     
                     <div class="invalid-feedback">
                         {% for error in form.biography.errors  %}
@@ -67,12 +67,12 @@
 
                 {#Phone number field#}
                 <div class="form-group">
-                    <label>Phone number</label>
+                    <label>Numero de telefono</label>
                     <input
                         class="form-control {% if form.phone_number.errors %}is-invalid{% endif %}" 
                         type="text"
                         name="phone_number"
-                        placeholder="Phone number"
+                        placeholder="Numero de telefono"
                         value="{% if form.errors %}{{ form.phone_number.value }}{% else %}{{ profile.phone_number }}{% endif %}"/>
                     <div class="invalid-feedback">
                         {% for error in form.phone_number.errors  %}
@@ -81,7 +81,7 @@
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-danger btn-block mt-5">Update info</button>
+                <button type="submit" class="btn btn-danger btn-block mt-5">Actualizar informacion</button>
             </form>
         </div>
     </div>

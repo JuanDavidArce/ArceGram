@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block head_content %}
-    <title>Update a post</title>
+    <title>Actualizar un post</title>
 {% endblock %}
 
 {% block container %}
@@ -9,7 +9,7 @@
     <div class="container">
         <div class="row justify-content-md-center">
             <div class="col-6 pt-3 pb-3" id="profile-box">
-                <h4 class="mb-4">Update your post!</h4>
+                <h4 class="mb-4">Actualiza tu post!</h4>
 
                 <form method="POST"  >
                     {% csrf_token %}
@@ -17,7 +17,7 @@
                    
                     {# Title field #}
                     <div class="form-group">
-                        <label>Title</label>
+                        <label>Titulo</label>
                         <input
                             class="form-control"
                             type="text"
@@ -33,7 +33,7 @@
                     </div>
                     {# description field #}
                     <div class="form-group">
-                        <label>Description</label>
+                        <label>Descripcion</label>
                         <textarea 
                             required="True"
                             class="form-control " 
@@ -48,7 +48,7 @@
                         </div> -->
                     </div>
 
-                    <button type="submit" class="btn btn-danger btn-block mt-5" >Update!</button>
+                    <button type="submit" class="btn btn-danger btn-block mt-5" >Actualizar!</button>
                 </form>
             </div>
         </div>

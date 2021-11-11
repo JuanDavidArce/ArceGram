@@ -84,12 +84,12 @@
                                             </div>
                                             <div class="user_info">
                                                 {% if thread.first_person == user %}
-                                                        <span>Chat with {{ thread.second_person.username }}</span>
+                                                        <span>Chat con {{ thread.second_person.username }}</span>
                                                 {% else %}
-                                                    <span>Chat with {{ thread.first_person.username }}</span>
+                                                    <span>Chat con {{ thread.first_person.username }}</span>
                                                 {% endif %}
 
-                                                <p>{{ thread.chatmessage_thread.all.count }} messages</p>
+                                                <p>{{ thread.chatmessage_thread.all.count }} Mensajes</p>
                                             </div>
                                         </div>
                                     </div>
@@ -122,7 +122,7 @@
                         <div class="card-footer">
                                 <form id="send-message-form">
                                     <div class="input-group">
-                                        <input type="text" name="" id="input-message" class="form-control type_msg" placeholder="Type your message...">
+                                        <input type="text" name="" id="input-message" class="form-control type_msg" placeholder="Escribe tu mensaje...">
                                         <div class="input-group-append">
                                             <button class="btn btn-secondary" type="submit">
                                                 <span class="input-group-text send_btn">
