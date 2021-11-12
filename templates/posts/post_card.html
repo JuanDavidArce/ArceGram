@@ -49,7 +49,7 @@
             <b>{{ post.title }}</b> - <small>{{ post.created }}</small>
         </p>
 
-        <div class="container comment">
+        <div class="container comment bg-secondary text-white">
             {% if not post.comments %}
                 Sin comentarios...
             {% endif %}
@@ -104,10 +104,10 @@
             {% csrf_token %}
             <input type='hidden' name='user_id' value="{{ request.user.pk }}">
             <input type='hidden' name='post_id' value="{{ post.pk }}">
-            <textarea
+            <textarea 
                 class="form-control" 
-                name="comment"> 
-            </textarea>
+                name="comment" 
+                placeholder="Escribe aqui tu comentario!"></textarea>
             <button class="btn btn-danger button-danger" type="submit">Comentar <i class="fa fa-comments" aria-hidden="true"></i></button>
             
         </form>

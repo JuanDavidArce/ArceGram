@@ -3,29 +3,34 @@
 {% block head_content %}
 <title>@{{ user.username }} | ArceGram</title>
 {% endblock %}
-
-
-
-
     {% block container %}
         {% if request.user.pk not in user.profile.blocked_to %}
             <div class="container mb-5 profile-user">
                 <div class="row">
-
+                    
                     <div class="col-sm-4 d-flex justify-content-center">
-                        <img
-                            src="{{ user.profile.picture.url }}"
-                            alt="@{{ user.username }}"
-                            class="rounded-circle"
-                            width="150px"
-                            height="150px"
-                        />
+                        <div class="container">
+
+                            <div class="row justify-content-center">
+                                <img
+                                    src="{{ user.profile.picture.url }}"
+                                    alt="@{{ user.username }}"
+                                    class="rounded-circle"
+                                    width="150px"
+                                    height="150px"
+                                    
+                                />
+                            </div>
+                            <div class="row justify-content-center">{{ user.get_full_name }}</div>
+                        </div>
+                        
+                   
                     </div>
                 
 
                     <div class="col-sm-8">
                         <h2 style="font-weight: 100;">
-                            {{ user.username }}
+                            @{{ user.username }}
                             {% if user == request.user %}
                                 <a
                                     href="{% url "users:update_profile" %}"
@@ -125,7 +130,7 @@
                     </div>
                 </div>
             </div>
-
+      
             <hr>
 
             <div class="container" id="user-posts">
