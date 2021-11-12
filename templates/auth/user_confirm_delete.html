@@ -4,8 +4,8 @@
         
         <div class="col text-center">
             <form action="" method="post">{% csrf_token %}
-                <h3>Estas seguro que deseas eliminar tu cuenta? "{{ object }}"?</h3>
-                <input type="submit" value="Confirm"/>
+                <h3>Estas seguro que deseas eliminar tu cuenta "{{ object }}"?</h3>
+                <input class='btn btn-danger' type="submit" value="Confirm"/>
             </form>
         </div>
     </div>

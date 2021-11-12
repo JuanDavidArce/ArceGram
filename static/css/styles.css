@@ -30,13 +30,22 @@
     border-color:transparent;
 }
 
+
 .delete-comment{
     background-color: transparent;
     border-color:transparent;
 }
 
+
 .trash-icon{
     color: red;
+}
+.trash-icon:hover {
+    -webkit-transform:scale(1.25);
+    -moz-transform:scale(1.25);
+    -ms-transform:scale(1.25);
+    -o-transform:scale(1.25);
+    transform:scale(1.25);
 }
 
 .update-comment {
@@ -51,6 +60,14 @@
 
 .update-icon {
     color: rgb(0, 255, 0);
+}
+
+.update-icon:hover {
+    -webkit-transform:scale(1.25);
+    -moz-transform:scale(1.25);
+    -ms-transform:scale(1.25);
+    -o-transform:scale(1.25);
+    transform:scale(1.25);
 }
 
 .row-comment {
