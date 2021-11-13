@@ -57,6 +57,11 @@ urlpatterns=[
         route='privacity',
         view=views.UserPrivacity.as_view(),
         name='privacity'),
+    path(
+        route='news',
+        view=views.UserNews.as_view(),
+        name='news'),
+
 
     # Posts
     path(
