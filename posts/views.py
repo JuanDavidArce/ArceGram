@@ -4,6 +4,7 @@ from django import views
 from django.contrib.auth import models
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
+from django.http import request
 from django.shortcuts import render,redirect,HttpResponseRedirect
 from django.views.generic import ListView, DetailView,CreateView,UpdateView
 from django.views import View
@@ -23,32 +24,31 @@ class UpdateComment(LoginRequiredMixin,UpdateView):
     model=Comment
     fields={'comment'}
     context_object_name='comment'
-    success_url= reverse_lazy('posts:feed')
 
     def post(self, request, *args, **kwargs):
+        print(request.POST)
         if request.POST.get("comment_id",False):
             return redirect("posts:update_comment",request.POST["comment_id"])
         return super().post(request, *args, **kwargs)
-
+            
+    def get_success_url(self):
+        post_id=self.object.post.pk
+        return reverse_lazy('posts:detail',kwargs={'pk':post_id})
     
-
-    
-
-
 
 class DeleteComment(LoginRequiredMixin,View):
     """Delete a Comment"""
     def post(self,request,*args,**kwargs):
         Comment.objects.get(pk= self.request.POST['comment_id']).delete()
-        return redirect('posts:feed')
+        return redirect('posts:detail',request.POST['post_id'])
 
 class PostComment(LoginRequiredMixin,View):
     def post(self, request, *args, **kwargs):
         if request.POST['comment'].strip()!='':
             comment = Comment(comment=request.POST['comment'],user_id=request.POST['user_id'],post_id=request.POST['post_id'])
             comment.save()
-
-        return redirect("posts:feed")
+            return redirect('posts:detail',request.POST['post_id'])
+        
 
 class UpdatePost(LoginRequiredMixin,UpdateView):
     """Update a post"""
@@ -67,8 +67,6 @@ class UpdatePost(LoginRequiredMixin,UpdateView):
         username=self.object.user.username
         return reverse_lazy('users:detail',kwargs={'username':username})
 
-    
-
 
 class DeletePost(View,LoginRequiredMixin):
     """Delete Post"""
@@ -81,7 +79,6 @@ class PostLike(View,LoginRequiredMixin):
     """Update Likes"""
     def post(self, request, *args, **kwargs):
         """Logic for the POST method"""
-        ubication=request.POST['ubication']
         post=Post.objects.get(id = request.POST['post_id'])
         user= User.objects.get(id=request.user.pk)
         post_id= post.pk
@@ -97,10 +94,8 @@ class PostLike(View,LoginRequiredMixin):
             like.delete()
             post.likes-=1
             post.save()
-        if ubication=='feed':
-            return redirect('posts:feed')
-        else:
-            return redirect('posts:detail',post_id)
+        
+        return redirect('posts:detail',post_id)
 
 
 

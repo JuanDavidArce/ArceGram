@@ -19,19 +19,10 @@
                 {{ post.description }}
             </p>
         </div>
-
+        <!-- Likes -->
         <form action="{% url 'posts:like'%}" method='POST' >
             {% csrf_token %}
             <input type='hidden' name='post_id' value="{{post.pk}}">
-            
-            <input type='hidden' name='ubication' 
-                {% if ubication %} 
-                    value="{{ ubication }}" 
-                {% else %} 
-                    value="detail_post" 
-                {% endif %}
-            >
-
             <button  type='submit hidden' class="like">
                 
                 {% if user.pk not in post.liked_by %}
@@ -64,15 +55,20 @@
                             <p style="margin-top: 5px;">{{ comment.user.get_full_name  }}</p>
                         </div>
                         {% if request.user == comment.user %}
+                        <!-- Delete Comment -->
+
                             <form action="{% url "posts:delete_comment" %}" method="POST" class="delete-comment">
+                                
                                 {% csrf_token %}
+                                <input type='hidden' name='post_id' value="{{post.pk}}">
                                 <input type="hidden" name="comment_id" value="{{ comment.pk }}">
                                 <button type="submit hidden" class="delete-comment-button" >
                                     <i class="fa fa-trash trash-icon" aria-hidden="true"></i>
                                 </button>
                             </form>
-                            
+                            <!-- Update comment -->
                             <form action="{% url "posts:update_comment" comment.pk %}" method="POST" class="update-comment">
+                                
                                 {% csrf_token %}
                                 <input type="hidden" name="comment_id" value="{{ comment.pk }}">
                                 <button type="submit hidden" class="update-comment-button">
@@ -99,7 +95,7 @@
             {% endfor %}
 
         </div >
-
+<!-- New Comments -->
         <form action="{% url "posts:comment" %}" method="POST">
             {% csrf_token %}
             <input type='hidden' name='user_id' value="{{ request.user.pk }}">

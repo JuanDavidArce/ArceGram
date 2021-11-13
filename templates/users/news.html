@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block container %}
+        
+            {% for new in news  %}
+                {% if new.content and new.urlToImage %}
+                    
+                    <div class="card text-white bg-info mb-3" >
+                        <img class="card-img-top" src="{{ new.urlToImage }}" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ new.title }}</h5>
+                            <p class="card-text">{{ new.content }}</p>
+                            <a href="{{ new.url }}" style="color: black;" target="_blank" > Ver mas noticia completa</a>
+                        </div>
+                    </div>
+            
+                {% endif %}
+                
+                <!-- <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+                    <div class="card-header">Header</div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ new.title }}</h5>
+                        <p class="card-text">{{ new.content }}</p>
+                    </div>
+                </div> -->
+            {% endfor %}
+        
+ 
+    
+{% endblock container %}

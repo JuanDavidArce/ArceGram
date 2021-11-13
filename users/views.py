@@ -22,7 +22,30 @@ from posts.models import Post
 from users.models import Blocked
 #Forms
 from users.forms import  SignupForm
+
+#Utilities
+import requests as rq
+
 # Create your views here.
+
+
+class UserNews(TemplateView):
+    template_name='users/news.html'
+
+    def get_context_data(self, **kwargs):
+        """Add users news to context"""
+        context=super().get_context_data(**kwargs)
+        url = ('https://newsapi.org/v2/top-headlines?'
+            'country=co&'
+            'apiKey=19142749ae834a47a15278be4b73bef0')
+        response = rq.get(url)
+        news=response.json()['articles']
+        context['news']=news
+        print(news)
+        return context
+
+
+
 
 class UserPrivacity(TemplateView):
     template_name='users/privacity.html'
@@ -96,12 +119,7 @@ class UserDetailView(LoginRequiredMixin,DetailView):
     slug_url_kwarg='username'
     queryset=User.objects.all()
     context_object_name='user'
-    def get_context_data(self, **kwargs):
-        """Add users posts to context"""
-        context=super().get_context_data(**kwargs)
-        user=self.get_object()
-        context['posts']=Post.objects.filter(user=user).order_by('-created')
-        return context
+
     def post(self, request, *args, **kwargs):
         user_to_follow_id = int(request.POST['user_to_follow'])
         user_follower_id = int(request.POST['user_follower'])
