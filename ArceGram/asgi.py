@@ -13,6 +13,10 @@ import chat.routing
 from django.core.asgi import get_asgi_application
 from channels.routing import ProtocolTypeRouter, URLRouter
 from channels.auth import AuthMiddlewareStack
+from sys import path as sys_path
+
+
+sys_path.append('./settings.py')    
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ArceGram.settings')
 django.setup()
