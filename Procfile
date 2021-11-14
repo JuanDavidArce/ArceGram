@@ -1,2 +1,3 @@
-web: daphne ArceGram.asgi:channel_layer --port $PORT --bind 0.0.0.0 -v2
-chatworker: python manage.py runworker --settings=ArceGram.settings -v2
+web: gunicorn ArceGram.wsgi:application --log-file - --log-level debug
+python manage.py collectstatic --noinput
+manage.py migrate
