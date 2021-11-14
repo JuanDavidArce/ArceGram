@@ -8,6 +8,8 @@ https://docs.djangoproject.com/en/3.2/howto/deployment/asgi/
 """
 
 import os
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ArceGram.settings')
 import django
 import chat.routing
 from django.core.asgi import get_asgi_application
@@ -15,8 +17,6 @@ from django.core.asgi import get_asgi_application
 from channels.routing import ProtocolTypeRouter, URLRouter
 from channels.auth import AuthMiddlewareStack
 
-
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ArceGram.settings')
 
 
 application = ProtocolTypeRouter({
