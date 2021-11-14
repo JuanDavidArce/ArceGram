@@ -11,6 +11,7 @@ import os
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ArceGram.settings')
 os.environ["DJANGO_ALLOW_ASYNC_UNSAFE"] = "true"
 import django
+django.setup()
 import chat.routing
 from django.core.asgi import get_asgi_application
 
