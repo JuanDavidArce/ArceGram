@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'users',
     'chat',
     'channels',
+    'cloudinary',
+    'cloudinary_storage',
 
 ]
 
@@ -97,13 +99,17 @@ ASGI_APPLICATION = 'ArceGram.asgi.application'
 #         'PORT': '3306',
 #     }
 # }
+
 import dj_database_url
 from decouple import config
+
 DATABASES = {
-    'default':dj_database_url.config(
+    'default': dj_database_url.config(
         default=config('DATABASE_URL')
     )
 }
+
+
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
@@ -140,25 +146,30 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-# STATIC_URL = '/static/'
-# STATICFILES_DIRS= (os.path.join(BASE_DIR,'static'),)
+# Cloudinary stuff
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dtpjikaq7',
+    'API_KEY': '543912491446219',
+    'API_SECRET': '8aJUf59NAVk0sGrqsY4CP1-ZrRM',
+}
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+STATIC_ROOT= os.path.join(BASE_DIR,'staticfiles')
+# STATIC_ROOT= os.path.join(BASE_DIR,'/')
+
 STATIC_URL = '/static/'
-# Extra places for collectstatic to find static files.
-STATICFILES_DIRS = (  
-    os.path.join(BASE_DIR, 'static'),
-)
-
-STATICFILES_STORAGE = 'whitenoise.django.CompressedManifestStaticFilesStorage'
-
+STATICFILES_DIRS= (os.path.join(BASE_DIR,'static'),)
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
+STATICFILES_STORAGE='whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
+# dtpjikaq7
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_ROOT= os.path.join(BASE_DIR,'media')
