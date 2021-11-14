@@ -25,9 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-zs)$9p@2n1gz273(c*)no7t-hj+$l2j!!2o+*g03g7%jgkvav^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -58,6 +58,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'ArceGram.middleware.ProfileCompletionMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'ArceGram.urls'
@@ -86,21 +87,23 @@ ASGI_APPLICATION = 'ArceGram.asgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'arceGram',
+#         'USER': 'root',
+#         'PASSWORD': 'toor',
+#         'HOST': '127.0.0.1',
+#         'PORT': '3306',
+#     }
+# }
+import dj_database_url
+from decouple import config
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'arceGram',
-        'USER': 'root',
-        'PASSWORD': 'toor',
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
-    }
+    'default':dj_database_url.config(
+        default=config('DATABASE_URL')
+    )
 }
-
-import dj_database_url  
-db_from_env = dj_database_url.config(conn_max_age=500)  
-DATABASES['default'].update(db_from_env)
-
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
@@ -147,7 +150,7 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.django.CompressedManifestStaticFilesStorage'
 
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
