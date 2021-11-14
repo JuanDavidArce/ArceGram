@@ -119,6 +119,12 @@ class UserDetailView(LoginRequiredMixin,DetailView):
     slug_url_kwarg='username'
     queryset=User.objects.all()
     context_object_name='user'
+    def get_context_data(self, **kwargs):
+        """Add users posts to context"""
+        context=super().get_context_data(**kwargs)
+        user=self.get_object()
+        context['posts']=Post.objects.filter(user=user).order_by('-created')
+        return context
 
     def post(self, request, *args, **kwargs):
         user_to_follow_id = int(request.POST['user_to_follow'])
