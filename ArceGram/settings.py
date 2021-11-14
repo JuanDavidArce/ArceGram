@@ -186,3 +186,5 @@ CHANNEL_LAYERS = {
         # }
     }
 }
+import ArceGram
+DJANGO_SETTINGS_MODULE=ArceGram.settings
