@@ -12,7 +12,7 @@ User = get_user_model()
 
 class ChatConsumer(AsyncConsumer):
     async def websocket_connect(self, event):
-        print('connected', event)
+        # print('connected', event)
         user = self.scope['user']
         chat_room = f'user_chatroom_{user.id}'
         self.chat_room = chat_room
@@ -25,7 +25,7 @@ class ChatConsumer(AsyncConsumer):
         })
 
     async def websocket_receive(self, event):
-        print('receive', event)
+        # print('receive', event)
         received_data = json.loads(event['text'])
         msg = received_data.get('message')
         sent_by_id = received_data.get('sent_by')
