@@ -41,7 +41,6 @@ class UserNews(TemplateView):
         response = rq.get(url)
         news=response.json()['articles']
         context['news']=news
-        print(news)
         return context
 
 

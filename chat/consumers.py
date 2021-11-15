@@ -78,7 +78,7 @@ class ChatConsumer(AsyncConsumer):
         print('disconnect', event)
 
     async def chat_message(self, event):
-        print('chat_message', event)
+        # print('chat_message', event)
         await self.send({
             'type': 'websocket.send',
             'text': event['text']
