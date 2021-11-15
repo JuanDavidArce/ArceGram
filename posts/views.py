@@ -26,7 +26,7 @@ class UpdateComment(LoginRequiredMixin,UpdateView):
     context_object_name='comment'
 
     def post(self, request, *args, **kwargs):
-        print(request.POST)
+
         if request.POST.get("comment_id",False):
             return redirect("posts:update_comment",request.POST["comment_id"])
         return super().post(request, *args, **kwargs)
