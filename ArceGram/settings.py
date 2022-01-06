@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-zs)$9p@2n1gz273(c*)no7t-hj+$l2j!!2o+*g03g7%jgkvav^'
+SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -86,19 +86,6 @@ TEMPLATES = [
 ASGI_APPLICATION = 'ArceGram.asgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'arceGram',
-#         'USER': 'root',
-#         'PASSWORD': 'toor',
-#         'HOST': '127.0.0.1',
-#         'PORT': '3306',
-#     }
-# }
 
 import dj_database_url
 from decouple import config
@@ -148,9 +135,9 @@ USE_TZ = True
 
 # Cloudinary stuff
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'dtpjikaq7',
-    'API_KEY': '543912491446219',
-    'API_SECRET': '8aJUf59NAVk0sGrqsY4CP1-ZrRM',
+    'CLOUD_NAME': os.environ['CLOUD_NAME'],
+    'API_KEY': os.environ['API_KEY'],
+    'API_SECRET':os.environ['API_SECRET'] ,
 }
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
