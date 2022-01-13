@@ -19,7 +19,7 @@ idna==3.2
 incremental==21.3.0
 mysqlclient==2.0.3
 nmap==0.0.1
-Pillow==8.3.2
+Pillow==9.0.0
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
 pycparser==2.20
