@@ -84,7 +84,7 @@
             <form action="{% url 'users:search' %}" method="GET" class="form-inline">
                 {% csrf_token %}
                 <div class="input-group">
-                  <input name="user_to_search" type="text" class="form-control" placeholder="Nombre de usuario" aria-label="Username" aria-describedby="basic-addon1">
+                  <input size="13" name="user_to_search" type="text" class="form-control" placeholder="Nombre de usuario" aria-label="Username" aria-describedby="basic-addon1">
                 </div>
                 <button type="submit" class="btn btn-secondary"><i class="fas fa-search"></i></button>
 
