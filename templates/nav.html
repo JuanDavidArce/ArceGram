@@ -4,6 +4,7 @@
     .dropdown {
         display: inline-block;
         position: relative;
+        background-color: white;
       }
       .dropdown-content {
         display: none;
@@ -35,6 +36,19 @@
         </a>
 
         <div class="collapse navbar-collapse">
+
+            <!-- Search user -->
+            <form action="{% url 'users:search' %}" method="GET" class="form-inline">
+                {% csrf_token %}
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">@</span>
+                  </div>
+                  <input name="user_to_search" type="text" class="form-control" placeholder="Nombre de usuario" aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+                <button type="submit" class="btn btn-secondary">Buscar</button>
+
+            </form>
 
             <div class="dropdown">
                 <button class="btn btn-secondary"><i class="fas fa-align-justify"></i></button>
@@ -76,18 +90,7 @@
             </div>
 
 
-            <!-- Search user -->
-            <form action="{% url 'users:search' %}" method="GET" class="form-inline">
-                {% csrf_token %}
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1">@</span>
-                  </div>
-                  <input name="user_to_search" type="text" class="form-control" placeholder="Nombre de usuario" aria-label="Username" aria-describedby="basic-addon1">
-                </div>
-                <button type="submit" class="btn btn-secondary">Buscar</button>
-
-            </form>
+            
         </div>
     </div>
 </nav>
