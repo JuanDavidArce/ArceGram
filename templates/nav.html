@@ -1,32 +1,5 @@
 {% load static %}
 
-<style>
-    .dropdown {
-        display: inline-block;
-        position: relative;
-      }
-      .dropdown-content {
-        display: none;
-        position: absolute;
-        width: 100%;
-        overflow: auto;
-        box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.4);
-      }
-      .dropdown:hover .dropdown-content {
-        display: block;
-      }
-      .dropdown-content a {
-        display: block;
-        color: #000000;
-        padding: 5px;
-        text-decoration: none;
-      }
-      .dropdown-content a:hover {
-        color: #FFFFFF;
-        background-color: #00A4BD;
-      }
-</style>
-
 <nav class="navbar navbar-expand sticky-top top-navbar"  >
     <div class="container-fluid">
 
@@ -37,7 +10,7 @@
         <div class="collapse navbar-collapse">
 
             <div class="dropdown">
-                <button>Options</button>
+                <button class="btn btn-secondary">Options</button>
                 <div class="dropdown-content">
 
                     <!-- detail user -->
@@ -51,24 +24,24 @@
 
                     <!-- Create post -->
                     <a href="{% url 'posts:create' %}">
-                        <i class="fas fa-plus new-post-icon"></i>
+                        <i class="fas fa-plus new-post-icon"></i> Nuevo
                     </a>
 
                     <!-- Logout -->
                     <a href="{% url 'users:logout' %}">
-                        <i class="fas fa-sign-out-alt"></i>
+                        <i class="fas fa-sign-out-alt"></i> Salir
                     </a>
                 
 
                     <!-- Chat -->
                     <a href="{% url 'chat:chat' %}">
-                        <i class="fa fa-comments" aria-hidden="true"></i>
+                        <i class="fa fa-comments" aria-hidden="true"></i> Chat
                     </a>
 
 
                     <!-- News -->
                     <a href="{% url 'users:news' %}">
-                        <i class="fa fa-newspaper" aria-hidden="true"></i>
+                        <i class="fa fa-newspaper" aria-hidden="true"></i> Noticias
                     </a>
 
                
