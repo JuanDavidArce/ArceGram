@@ -1,4 +1,32 @@
 {% load static %}
+
+<style>
+    .dropdown {
+        display: inline-block;
+        position: relative;
+      }
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        width: 100%;
+        overflow: auto;
+        box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.4);
+      }
+      .dropdown:hover .dropdown-content {
+        display: block;
+      }
+      .dropdown-content a {
+        display: block;
+        color: #000000;
+        padding: 5px;
+        text-decoration: none;
+      }
+      .dropdown-content a:hover {
+        color: #FFFFFF;
+        background-color: #00A4BD;
+      }
+</style>
+
 <nav class="navbar navbar-expand sticky-top top-navbar"  >
     <div class="container-fluid">
 
@@ -7,10 +35,12 @@
         </a>
 
         <div class="collapse navbar-collapse">
-            <ul class="navbar-nav mr-auto">
-                <!-- detail user -->
 
-                <li class="nav-item">
+            <div class="dropdown">
+                <button>Options</button>
+                <div class="dropdown-content">
+
+                    <!-- detail user -->
                     <a href="{% url 'users:detail' request.user.username %}">
                         {% if request.user.profile.picture %}
                             <img src="{{ request.user.profile.picture.url }}" height="35" width="35" class="d-inline-block align-top rounded-circle"/>
@@ -18,36 +48,34 @@
                             <img src="https://www.pngarts.com/files/10/Default-Profile-Picture-Download-PNG-Image.png" height="35" width="35" class="d-inline-block align-top rounded-circle"/>
                         {% endif %}
                     </a>
-                </li>
-                <!-- Create post -->
-                <li class="nav-item nav-icon">
+
+                    <!-- Create post -->
                     <a href="{% url 'posts:create' %}">
                         <i class="fas fa-plus new-post-icon"></i>
                     </a>
-                </li>
-                <!-- Logout -->
-                <li class="nav-item nav-icon">
+
+                    <!-- Logout -->
                     <a href="{% url 'users:logout' %}">
                         <i class="fas fa-sign-out-alt"></i>
                     </a>
-                </li>
+                
 
-                <!-- Chat -->
-                <li class="nav-item nav-icon">
+                    <!-- Chat -->
                     <a href="{% url 'chat:chat' %}">
                         <i class="fa fa-comments" aria-hidden="true"></i>
                     </a>
-                </li>
 
-                <!-- News -->
-                <li class="nav-item nav-icon">
+
+                    <!-- News -->
                     <a href="{% url 'users:news' %}">
                         <i class="fa fa-newspaper" aria-hidden="true"></i>
                     </a>
-                </li>
 
-                
-            </ul>
+               
+                </div>
+            </div>
+
+
             <!-- Search user -->
             <form action="{% url 'users:search' %}" method="GET" class="form-inline">
                 {% csrf_token %}
