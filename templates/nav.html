@@ -16,7 +16,7 @@
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                     <!-- detail user -->
 
-                    <li class="nav-item dropdown-item">
+                    <li class="dropdown-item">
                         <a href="{% url 'users:detail' request.user.username %}">
                             {% if request.user.profile.picture %}
                                 <img src="{{ request.user.profile.picture.url }}" height="35" width="35" class="d-inline-block align-top rounded-circle"/>
@@ -26,27 +26,27 @@
                         </a>
                     </li>
                     <!-- Create post -->
-                    <li class="nav-item nav-icon dropdown-item">
+                    <li class="dropdown-item">
                         <a href="{% url 'posts:create' %}">
                             <i class="fas fa-plus new-post-icon"></i>
                         </a>
                     </li>
                     <!-- Logout -->
-                    <li class="nav-item nav-icon dropdown-item">
+                    <li class="dropdown-item">
                         <a href="{% url 'users:logout' %}">
                             <i class="fas fa-sign-out-alt"></i>
                         </a>
                     </li>
 
                     <!-- Chat -->
-                    <li class="nav-item nav-icon dropdown-item">
+                    <li class="dropdown-item">
                         <a href="{% url 'chat:chat' %}">
                             <i class="fa fa-comments" aria-hidden="true"></i>
                         </a>
                     </li>
 
                     <!-- News -->
-                    <li class="nav-item nav-icon dropdown-item">
+                    <li class="dropdown-item">
                         <a href="{% url 'users:news' %}">
                             <i class="fa fa-newspaper" aria-hidden="true"></i>
                         </a>
