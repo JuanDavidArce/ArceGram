@@ -38,57 +38,59 @@
             <img src="https://dl.dropboxusercontent.com/s/nx93c9tbwbln77r/ArceGram.png?dl=0" height="45" class="d-inline-block align-top"/>
         </a>
 
-        <div class="collapse navbar-collapse">
+        <div class="container-fluid">
+            <div class="row">
 
-            <div class="dropdown">
-                <button class="btn btn-secondary"><i class="fas fa-align-justify"></i></button>
-                <div class="dropdown-content">
+                <div class="col-2 dropdown">
+                    <button class="btn btn-secondary"><i class="fas fa-align-justify"></i></button>
+                    <div class="dropdown-content">
 
-                    <!-- detail user -->
-                    <a href="{% url 'users:detail' request.user.username %}">
-                        {% if request.user.profile.picture %}
-                            <img src="{{ request.user.profile.picture.url }}" height="35" width="35" class="d-inline-block align-top rounded-circle"/>
-                        {% else %}
-                            <img src="https://www.pngarts.com/files/10/Default-Profile-Picture-Download-PNG-Image.png" height="35" width="35" class="d-inline-block align-top rounded-circle"/>
-                        {% endif %}
-                    </a>
+                        <!-- detail user -->
+                        <a href="{% url 'users:detail' request.user.username %}">
+                            {% if request.user.profile.picture %}
+                                <img src="{{ request.user.profile.picture.url }}" height="35" width="35" class="d-inline-block align-top rounded-circle"/>
+                            {% else %}
+                                <img src="https://www.pngarts.com/files/10/Default-Profile-Picture-Download-PNG-Image.png" height="35" width="35" class="d-inline-block align-top rounded-circle"/>
+                            {% endif %}
+                        </a>
 
-                    <!-- Create post -->
-                    <a href="{% url 'posts:create' %}">
-                        <i class="fas fa-plus new-post-icon"></i>
-                    </a>
+                        <!-- Create post -->
+                        <a href="{% url 'posts:create' %}">
+                            <i class="fas fa-plus new-post-icon"></i>
+                        </a>
 
-                    <!-- Logout -->
-                    <a href="{% url 'users:logout' %}">
-                        <i class="fas fa-sign-out-alt"></i>
-                    </a>
+                        <!-- Logout -->
+                        <a href="{% url 'users:logout' %}">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </a>
+                    
+
+                        <!-- Chat -->
+                        <a href="{% url 'chat:chat' %}">
+                            <i class="fa fa-comments" aria-hidden="true"></i>
+                        </a>
+
+
+                        <!-- News -->
+                        <a href="{% url 'users:news' %}">
+                            <i class="fa fa-newspaper" aria-hidden="true"></i>
+                        </a>
+
                 
-
-                    <!-- Chat -->
-                    <a href="{% url 'chat:chat' %}">
-                        <i class="fa fa-comments" aria-hidden="true"></i>
-                    </a>
-
-
-                    <!-- News -->
-                    <a href="{% url 'users:news' %}">
-                        <i class="fa fa-newspaper" aria-hidden="true"></i>
-                    </a>
-
-               
+                    </div>
                 </div>
+
+
+                <!-- Search user -->
+                <form action="{% url 'users:search' %}" method="GET" class="col form-inline">
+                    {% csrf_token %}
+                    <div class="input-group">
+                    <input  name="user_to_search" type="text" class="form-control" placeholder="Nombre de usuario" aria-label="Username" aria-describedby="basic-addon1">
+                    </div>
+                    <button type="submit" class="btn btn-secondary"><i class="fas fa-search"></i></button>
+
+                </form>
             </div>
-
-
-            <!-- Search user -->
-            <form action="{% url 'users:search' %}" method="GET" class="form-inline">
-                {% csrf_token %}
-                <div class="input-group">
-                  <input  name="user_to_search" type="text" class="form-control" placeholder="Nombre de usuario" aria-label="Username" aria-describedby="basic-addon1">
-                </div>
-                <button type="submit" class="btn btn-secondary"><i class="fas fa-search"></i></button>
-
-            </form>
         </div>
     </div>
 </nav>
