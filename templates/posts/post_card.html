@@ -60,11 +60,7 @@
                         </p>
                     </div>
 
-                    <div class="row ml-2 row-comment" >
-                        <p style="font-size: 15px;">
-                            {{ comment.comment }}
-                        </p>
-                    </div>
+                    
 
                     <div class="row ml-2">
                         {% if request.user == comment.user %}
@@ -89,6 +85,11 @@
                                 </button>
                             </form>
                         {% endif %}
+                    </div>
+                    <div class="row ml-2 row-comment" >
+                        <p style="font-size: 15px;">
+                            {{ comment.comment }}
+                        </p>
                     </div>
 
                     
