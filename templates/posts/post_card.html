@@ -48,9 +48,9 @@
                 {% if request.user.pk not in comment.user.profile.blocked_to and comment.user.pk not in request.user.profile.blocked_to %}
                     
                     <div class="row ml-2">
-                        <a href="{% url 'users:detail' comment.user.username %}">
+                        <a class="col-1" href="{% url 'users:detail' comment.user.username %}">
                             <img class="mr-3 rounded-circle" height="30" width="30" src="{{ comment.user.profile.picture.url }}" alt="{{ comment.user.get_full_name }}" >
-                        </a class="col-1">
+                        </a >
                         <div class="media-body col">
                             <p style="margin-top: 5px;">{{ comment.user.get_full_name  }}</p>
                         </div>

@@ -145,7 +145,7 @@
                                     
                                     <div class="row">
                                         <!-- Delete post -->
-                                        <form action="{% url "posts:delete" %}" method="POST"  style="background-color: transparent;border-color:transparent;">
+                                        <form class="col-1" action="{% url "posts:delete" %}" method="POST"  style="background-color: transparent;border-color:transparent;">
                                             {% csrf_token %}
                                             <input type="hidden" name="post_id" value="{{ post.pk }}">
                                             <input type="hidden" name="username" value="{{ user.username }}">
@@ -154,7 +154,7 @@
                                             </button>
                                         </form>
                                         <!-- Update post -->
-                                        <form action="{% url "posts:update" post.pk %}" method="POST"  style="background-color: transparent;border-color:transparent;">
+                                        <form class="col" action="{% url "posts:update" post.pk %}" method="POST"  style="background-color: transparent;border-color:transparent;">
                                             {% csrf_token %}
                                             <button type="submit hidden" style="background-color: transparent;border-color:transparent;">
                                                 <i class="fas fa-arrow-alt-circle-up update-icon" aria-hidden="true"></i>
